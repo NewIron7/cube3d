@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/20 19:27:12 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/20 22:37:51 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@
 # define W_HEIGHT 480
 # define W_NAME "cube3d"
 
+typedef struct s_dpoint
+{
+	double x;
+	double y;
+}	t_dpoint;
+
+typedef struct s_pvect
+{
+	t_dpoint pos;
+	t_dpoint dir;
+}	t_pvect;
+
 typedef struct s_point
 {
 	int	x;
@@ -44,11 +56,17 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_map
+{
+	char **map;
+	t_point size;
+}	t_map;
+
 typedef struct s_app
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
-	char			**map;
+	t_map			map;
 	t_img			img;
 }	t_app;
 
@@ -61,4 +79,5 @@ void    ft_error_malloc(const void *ptr, t_app *app, char *str);
 
 int		ft_close(t_app *app);
 
+void	test_get_coord_wall(void);
 #endif
