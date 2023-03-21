@@ -24,13 +24,26 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define W_WIDTH 720
-# define W_HEIGHT 480
+# define W_WIDTH 1080
+# define W_HEIGHT 720
 # define W_NAME "cube3d"
 
 # define C_RED 0x00FF0000
 # define C_GREEN 0x0000FF00
 
+# define C_NORTH 0x00c27ba0 //pink
+# define C_SOUTH 0x00783f04//dark brow
+# define C_EAST 0x00f1c232 //yellow
+# define C_WEST	0x007f6000 //brown
+# define C_GROUND 0x0093c47d //green
+
+# define PANEL 0.5773502692
+
+# define PI_6 0.5235987756
+# define PI_4 0.7853981634
+# define PI_3 1.047197551
+# define PI_2 1.570796327
+# define TAN_60 1.732050808
 # define COS_60 0.5
 # define SIN_60 0.8660254038
 # define SIN_30 0.5
@@ -52,6 +65,13 @@ typedef struct s_dpoint
 	double x;
 	double y;
 }	t_dpoint;
+
+typedef struct s_screen
+{
+	double	panel;
+	double	step;
+	t_dpoint dir; 
+}	t_screen;
 
 typedef struct s_pvect
 {

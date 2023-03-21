@@ -80,8 +80,8 @@ static char	is_wall_x(t_wall *wall, t_map *map)
 	if (wall->orient == WEST)
 		wall->pos.x -= 1;
 	wall->pos.y = (int)wall->dir.y;
-	if (wall->pos.y < 0 || wall->pos.y > map->size.y
-		|| wall->pos.x < 0 || wall->pos.x > map->size.x)
+	if (wall->pos.y < 0 || wall->pos.y >= map->size.y
+		|| wall->pos.x < 0 || wall->pos.x >= map->size.x)
 		return (1);
 	if (map->map[wall->pos.y][wall->pos.x])
 		return (1);
@@ -194,8 +194,8 @@ double	get_dist_wall(t_pvect *player, t_wall *wall)
 {
 	double	dist;
 
-	dist = (wall->dir.x - player->dir.x) * (wall->dir.x - player->dir.x);
-	dist += (wall->dir.y - player->dir.y) * (wall->dir.y - player->dir.y);
+	dist = (wall->dir.x - player->pos.x) * (wall->dir.x - player->pos.x);
+	dist += (wall->dir.y - player->pos.y) * (wall->dir.y - player->pos.y);
 	dist = sqrt(dist);
 	return (dist);
 }

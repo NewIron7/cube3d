@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 11:22:46 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/21 16:12:55 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/22 00:41:35 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cube3d.h"
@@ -55,10 +55,10 @@ void	test_get_coord_wall(t_img *img)
 	cpy_map(tmp, 24, 10, &map.map);
 	map.size.x = 24;
 	map.size.y = 10;
-	dir.x = cos(M_PI/3);
-	dir.y = sin(M_PI/3);
-	pos.x = 2.5;
-	pos.y = 2.5;
+	dir.x = cos((M_PI * 2)/3);
+	dir.y = sin((M_PI*2)/3);
+	pos.x = 20.5;
+	pos.y = 3.5;
 	player.dir = dir;
 	player.pos = pos;
 	raycasting(player, &map, img);

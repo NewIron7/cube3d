@@ -41,8 +41,8 @@ int	main(int argc, char **argv)
 	app.win_ptr = mlx_new_window(app.mlx_ptr, W_WIDTH, W_HEIGHT, W_NAME);
 	ft_error_malloc(app.win_ptr, &app, "MLX ERROR: can't create a window");
 	new_img(&app, app.mlx_ptr, W_WIDTH, W_HEIGHT);
-	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, app.img.ptr, 0, 0);
 	test_get_coord_wall(&app.img);
+	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, app.img.ptr, 0, 0);
 	mlx_hook(app.win_ptr, 17, 0, ft_close, &app);
 	mlx_loop(app.mlx_ptr);
 	return (0);
