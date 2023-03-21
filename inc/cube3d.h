@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/21 10:58:20 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/21 16:04:34 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,16 @@
 # define W_HEIGHT 480
 # define W_NAME "cube3d"
 
-# define ANGLE -(M_PI * 2)/3
+# define C_RED 0x00FF0000
+# define C_GREEN 0x0000FF00
+
+# define COS_60 0.5
+# define SIN_60 0.8660254038
+# define SIN_30 0.5
+# define COS_30 0.8660254038
+# define A_DIST -0.02564102564
+# define B_DIST 1.012820513
+# define ANGLE (M_PI)/3
 
 enum e_orient
 {
@@ -92,7 +101,8 @@ void	init_struct(t_app *app);
 void    new_img(t_app *app, void *mlx, int width, int height);
 void	put_pixel(t_img *img, int x, int y, int color);
 
-void	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map, t_wall *wall);
+t_wall	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map);
+void	raycasting(t_pvect player, t_map *map, t_img *img);
 
 t_dpoint	mult_dpoint(t_dpoint a, double coef);
 t_dpoint	sum_dpoint(t_dpoint a, t_dpoint b);
@@ -103,5 +113,5 @@ void    ft_error_malloc(const void *ptr, t_app *app, char *str);
 
 int		ft_close(t_app *app);
 
-void	test_get_coord_wall(void);
+void	test_get_coord_wall(t_img *img);
 #endif

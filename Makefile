@@ -20,6 +20,7 @@ SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/init.c\
 	  $(SRC_DIR)/img.c\
 	  $(SRC_DIR)/get_coord_wall.c\
+	  $(SRC_DIR)/raycasting.c\
 	  $(SRC_DIR)/point.c\
 	  $(SRC_DIR)/test.c\
 	  $(SRC_DIR)/error.c
