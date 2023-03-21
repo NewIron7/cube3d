@@ -6,7 +6,7 @@
 #    By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 18:05:23 by hboissel          #+#    #+#              #
-#    Updated: 2023/03/20 19:27:43 by hboissel         ###   ########.fr        #
+#    Updated: 2023/03/21 10:09:08 by hboissel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,9 @@ BIN_DIR = obj
 SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/init.c\
 	  $(SRC_DIR)/img.c\
+	  $(SRC_DIR)/get_coord_wall.c\
+	  $(SRC_DIR)/point.c\
+	  $(SRC_DIR)/test.c\
 	  $(SRC_DIR)/error.c
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)

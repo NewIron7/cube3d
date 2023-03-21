@@ -6,136 +6,156 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:45:05 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/20 23:28:32 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/21 11:42:19 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	cpy_dpoint(t_dpoint *src, t_dpoint *dest)
+static double	get_first_step_x(t_pvect vect)
 {
-	dest->x = src->x;
-	dest->y = src->y;
-}
+	double	step;
 
-void	calculate_move_coef(double x, double y, double *move)
-{
-	double tmp;
-
-	if (x == 0)
-		*move = 0;
-	else
+	if (vect.dir.x > 0)
+		step = ((int)vect.pos.x + 1) - vect.pos.x;
+	else if (vect.dir.x < 0)
 	{
-		tmp = (y * y) / (x * x) + 1;
-		*move = sqrt(tmp);
+		step = ((int)vect.pos.x) - vect.pos.x;
+		if (step == 0)
+			step = -1;
 	}
-}
-
-double	get_first_step_x(t_pvect vect)
-{
-	double	step;
-
-	if (vect.dir.x > vect.pos.x)
-		step = 1 - vect.pos.x;
-	else if (vect.dir.x < vect.pos.x)
-		step = vect.pos.x;
 	else
 		step = 0;
 	return (step);
 }
 
-double	get_first_step_y(t_pvect vect)
+static double	get_first_step_y(t_pvect vect)
 {
 	double	step;
 
-	if (vect.dir.y > vect.pos.y)
-		step = 1 - vect.pos.y;
-	else if (vect.dir.y < vect.pos.y)
-		step = vect.pos.y;
+	if (vect.dir.y > 0)
+		step = ((int)vect.pos.y + 1) - vect.pos.y;
+	else if (vect.dir.y < 0)
+	{
+		step = ((int)vect.pos.y) - vect.pos.y;
+		if (step == 0)
+			step = -1;
+	}
 	else
 		step = 0;
 	return (step);
 }
 
-t_dpoint	sum_pos_dir_coef(t_pvect vect, double coef)
+static void	init_player(t_pvect *player, t_dpoint dir, t_dpoint pos)
 {
-	vect.dir.x *= coef;
-	vect.dir.y *= coef;
-	vect.pos.x += tmp_dir.x;
-	vect.pos.y += tmp_dir.y;
-	return (vect.pos);
+	cpy_dpoint(&pos, &player->pos);
+	cpy_dpoint(&dir, &player->dir);
 }
 
-char	check_wall(t_pvect *wall, t_dpoint pos, t_map map)
+static t_dpoint	next_wall_x(t_dpoint *pos, double n, double step)
 {
-	int	x;
-	int	y;
+	t_dpoint	wall;
 
-	x = (int)wall->dir.x;
-	y = (int)wall->dir.y;
-	if (
+	wall.x = step + pos->x;
+	wall.y = (n * step) + pos->y;
+	pos->x = wall.x;
+	pos->y = wall.y;
+	return (wall);
 }
 
-double	get_coord_x_wall(double mx, t_pvect vect, t_map map, t_pvect *wall)
+static t_dpoint	next_wall_y(t_dpoint *pos, double n, double step)
 {
+	t_dpoint	wall;
+
+	wall.y = step + pos->y;
+	wall.x = (n * step) + pos->x;
+	pos->x = wall.x;
+	pos->y = wall.y;
+	return (wall);
+}
+
+static char	is_wall_x(t_wall *wall, t_map *map)
+{
+	wall->pos.x = (int)wall->dir.x;
+	if (wall->orient == WEST)
+		wall->pos.x -= 1;
+	wall->pos.y = (int)wall->dir.y;
+	if (wall->pos.y < 0 || wall->pos.y > map->size.y
+		|| wall->pos.x < 0 || wall->pos.x > map->size.x)
+		return (1);
+	if (map->map[wall->pos.y][wall->pos.x])
+		return (1);
+	else
+		return (0);
+}
+
+static char	is_wall_y(t_wall *wall, t_map *map)
+{
+	wall->pos.y = (int)wall->dir.y;
+	if (wall->orient == NORTH)
+		wall->pos.y -= 1;
+	wall->pos.x = (int)wall->dir.x;
+	if (wall->pos.y < 0 || wall->pos.y > map->size.y
+		|| wall->pos.x < 0 || wall->pos.x > map->size.x)
+		return (1);
+	if (map->map[wall->pos.y][wall->pos.x])
+		return (1);
+	else
+		return (0);
+}
+
+static void	get_coord_wall_x(t_pvect player, t_map *map, t_wall *wall)
+{
+	double	n;
 	double	step;
-	double	dist;
 
-	dist = 0;
-	step = get_first_step_x(vect);
+	wall->dist = 0;
+	n = player.dir.y / player.dir.x;
+	step = get_first_step_x(player);
+	wall->orient = EAST;
+	if (step < 0)
+		wall->orient = WEST;
 	while (step)
 	{
-		dist = step * mx;
-		wall->dir = sum_pos_dir_coef(&vect, step * mx);
-		if (check_wall(wall, vect.pos, map))
-			return (dist);
+		wall->dir = next_wall_x(&player.pos, n, step);
+		if (is_wall_x(wall, map))
+			break ;
 		step = 1;
+		if (wall->orient == WEST)
+			step = -1;
 	}
 }
 
-double	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map map, t_pvect *wall)
+static void	get_coord_wall_y(t_pvect player, t_map *map, t_wall *wall)
 {
-	double	mx;
-	double	my;
-	double	dist;
-	t_pvect	vect;
+	double	n;
+	double	step;
 
-	calculate_move_coef(dir.x, dir.y, &mx);
-	calculate_move_coef(dir.y, dir.x, &my);
-	cpy_dpoint(&dir, &vect.dir);
-	cpy_dpoint(&pos, &vect.pos);
-	dist = get_coord_x_wall(mx, vect, map, wall);
-
+	wall->dist = 0;
+	n = player.dir.x / player.dir.y;
+	step = get_first_step_y(player);
+	wall->orient = SOUTH;
+	if (step < 0)
+		wall->orient = NORTH;
+	while (step)
+	{
+		wall->dir = next_wall_y(&player.pos, n, step);
+		if (is_wall_y(wall, map))
+			break ;
+		step = 1;
+		if (wall->orient == NORTH)
+			step = -1;
+	}
 }
 
-void	test_get_coord_wall(void)
+void	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map, t_wall *wall)
 {
-	char	tmp[10][24] =
-	{
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-		{1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-		{1,0,0,0,0,0,0,0,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
-	};
-	t_map	map;
-	t_dpoint	dir;
-	t_dpoint	pos;
-	t_pvect		result;
-	double		dist;
+	t_pvect	player;
+	t_wall	tmp;
 
-	map.map = tmp;
-	map.size.x = 24;
-	map.size.y = 10;
-	dir.x = 0;
-	dir.y = 1;
-	pos.x = 1;
-	pos.y = 9;
-	dist = get_coord_wall(dir, pos, map, &result);
-	printf("RESULT: (x) %f, (y) %f, dist = %f\n", result.pos.x, result.pos.y, dist);
+	init_player(&player, dir, pos);
+	get_coord_wall_x(player, map, wall);
+	get_coord_wall_y(player, map, &tmp);
+	printf("[Y] POS: (x) %d, (y) %d DIR: (x) %f, (y) %f\n", tmp.pos.x, tmp.pos.y,
+			tmp.dir.x, tmp.dir.y);
 }
