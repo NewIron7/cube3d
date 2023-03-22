@@ -28,6 +28,8 @@
 # define W_HEIGHT 720
 # define W_NAME "cube3d"
 
+# define KEY_ESC 65307
+
 # define C_RED 0x00FF0000
 # define C_GREEN 0x0000FF00
 
@@ -36,8 +38,12 @@
 # define C_EAST 0x00f1c232 //yellow
 # define C_WEST	0x007f6000 //brown
 # define C_GROUND 0x0093c47d //green
+# define C_CEILLING 0x00282130 //black
 
 # define PANEL 0.5773502692
+
+# define ROT_ANGLE 0.0689066
+# define COEF_MOVE 0.25
 
 # define PI_6 0.5235987756
 # define PI_4 0.7853981634
@@ -115,6 +121,7 @@ typedef struct s_app
 	void			*win_ptr;
 	t_map			map;
 	t_img			img;
+	t_pvect			player;
 }	t_app;
 
 void	init_struct(t_app *app);
@@ -123,13 +130,17 @@ void	put_pixel(t_img *img, int x, int y, int color);
 
 t_wall	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map);
 void	raycasting(t_pvect player, t_map *map, t_img *img);
+void    init_raycasting(t_app *app);
 
 t_dpoint	mult_dpoint(t_dpoint a, double coef);
 t_dpoint	sum_dpoint(t_dpoint a, t_dpoint b);
 void	cpy_dpoint(t_dpoint *src, t_dpoint *dest);
+t_dpoint    rotate_vect(t_dpoint *vect, double angle);
 
 void    ft_error_mlx(t_app *app);
 void    ft_error_malloc(const void *ptr, t_app *app, char *str);
+
+int handle_key_press(int keycode, t_app *app);
 
 int		ft_close(t_app *app);
 

@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 11:23:09 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/21 11:23:11 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/22 09:19:52 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,13 @@ t_dpoint	mult_dpoint(t_dpoint a, double coef)
 	result.x = a.x * coef;
 	result.y = a.y * coef;
 	return (result);
+}
+
+t_dpoint	rotate_vect(t_dpoint *vect, double angle)
+{
+	t_dpoint	nvect;
+
+	nvect.x = vect->x * cos(angle) - vect->y * sin(angle);
+	nvect.y = vect->x * sin(angle) + vect->y * cos(angle);
+	return (nvect);
 }

@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 11:22:46 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/22 00:41:35 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/22 09:27:00 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cube3d.h"
@@ -31,7 +31,7 @@ static void	cpy_map(char tmp[10][24], int w, int h, char ***map)
 	}
 }
 
-void	test_get_coord_wall(t_img *img)
+void	init_map(t_map *map)
 {
 	char	tmp[10][24] =
 	{
@@ -46,23 +46,23 @@ void	test_get_coord_wall(t_img *img)
 		{1,0,0,0,0,0,0,0,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
 		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
-	t_map	map;
-	t_dpoint	dir;
-	t_dpoint	pos;
-	//t_wall		wall;
-	t_pvect		player;
 
-	cpy_map(tmp, 24, 10, &map.map);
-	map.size.x = 24;
-	map.size.y = 10;
-	dir.x = cos((M_PI * 2)/3);
-	dir.y = sin((M_PI*2)/3);
-	pos.x = 20.5;
-	pos.y = 3.5;
-	player.dir = dir;
-	player.pos = pos;
-	raycasting(player, &map, img);
-	//wall = get_coord_wall(dir, pos, &map);
-	//printf("POS: (%d, %d) DIR: (%f, %f)\nORIENT:%d DIST:%f\n", wall.pos.x, wall.pos.y,
-	//		wall.dir.x, wall.dir.y, wall.orient, wall.dist);
+	cpy_map(tmp, 24, 10, &map->map);
+	map->size.x = 24;
+	map->size.y = 10;
+}
+
+void	init_player(t_pvect	*player)
+{
+	player->dir.x = 0;
+	player->dir.y = 1;
+	player->pos.x = 2.5;
+	player->pos.y = 2.5;
+}
+
+void	init_raycasting(t_app *app)
+{
+	init_map(&app->map);
+	init_player(&app->player);
+	raycasting(app->player, &app->map, &app->img);
 }
