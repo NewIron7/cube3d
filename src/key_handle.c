@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 08:54:52 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/23 22:19:39 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:16:58 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,29 @@ static char	check_collisions(t_pvect *player, t_dpoint *move, t_map *map)
 	return (0);
 }
 
-void	player_move_straight(t_pvect *player, t_map *map)
+void	player_move(t_pvect *player, t_map *map, char move)
 {
 	t_dpoint	dir_move;
 
-	dir_move = mult_dpoint(player->dir, COEF_MOVE);
+	if (move == W_KEY)
+		dir_move = mult_dpoint(player->dir, COEF_MOVE);
+	else if (move == S_KEY)
+		dir_move = mult_dpoint(player->dir, -COEF_MOVE);
+	else
+	{
+		dir_move = get_vect_orth(player->dir);
+		if (move == A_KEY)
+			dir_move = mult_dpoint(dir_move, -COEF_MOVE_SIDE);
+		if (move == D_KEY)
+			dir_move = mult_dpoint(dir_move, COEF_MOVE_SIDE);
+	}
 	dir_move = sum_dpoint(player->pos, dir_move);
 	//check collision
 	if (!check_exit_map(dir_move, map) && !check_collisions(player, &dir_move, map))
 		player->pos = dir_move;
 	printf("%f, %f\n", player->pos.x, player->pos.y);
 }
-
+/*
 int	handle_key_press(int keycode, t_app *app)
 {
 	if (keycode == KEY_ESC)
@@ -81,5 +92,57 @@ int	handle_key_press(int keycode, t_app *app)
 		player_move_straight(&app->player, &app->map);
 	raycasting(app->player, &app->map, &app->img);
 	mlx_put_image_to_window(app->mlx_ptr, app->win_ptr, app->img.ptr, 0, 0);
+	return (0);
+}*/
+
+void	do_player_move(t_app *app)
+{
+	if (app->keys[W_KEY])
+		player_move(&app->player, &app->map, W_KEY);
+	if (app->keys[S_KEY])
+		player_move(&app->player, &app->map, S_KEY);
+	if (app->keys[A_KEY])
+		player_move(&app->player, &app->map, A_KEY);
+	if (app->keys[D_KEY])
+		player_move(&app->player, &app->map, D_KEY);
+	if (app->keys[LEFT_KEY])
+		app->player.dir = rotate_vect(&app->player.dir, -ROT_ANGLE);
+	if (app->keys[RIGHT_KEY])
+		app->player.dir = rotate_vect(&app->player.dir, ROT_ANGLE);
+}
+
+int	handle_key_press(int keycode, t_app *app)
+{
+	if (keycode == KEY_ESC)
+		ft_close(app);
+	else if (keycode == KEY_LEFT)
+		app->keys[LEFT_KEY] = 1;
+	else if (keycode == KEY_RIGHT)
+		app->keys[RIGHT_KEY] = 1;
+	else if (keycode == 'w')
+		app->keys[W_KEY] = 1;
+	else if (keycode == 's')
+		app->keys[S_KEY] = 1;
+	else if (keycode == 'a')
+		app->keys[A_KEY] = 1;
+	else if (keycode == 'd')
+		app->keys[D_KEY] = 1;
+	return (0);
+}
+
+int	handle_key_release(int keycode, t_app *app)
+{
+	if (keycode == KEY_LEFT)
+		app->keys[LEFT_KEY] = 0;
+	else if (keycode == KEY_RIGHT)
+		app->keys[RIGHT_KEY] = 0;
+	else if (keycode == 'w')
+		app->keys[W_KEY] = 0;
+	else if (keycode == 's')
+		app->keys[S_KEY] = 0;
+	else if (keycode == 'a')
+		app->keys[A_KEY] = 0;
+	else if (keycode == 'd')
+		app->keys[D_KEY] = 0;
 	return (0);
 }

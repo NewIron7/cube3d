@@ -44,3 +44,12 @@ t_dpoint	rotate_vect(t_dpoint *vect, double angle)
 	nvect.y = vect->x * sin(angle) + vect->y * cos(angle);
 	return (nvect);
 }
+
+t_dpoint	get_vect_orth(t_dpoint a)
+{
+	t_dpoint	b;
+
+	b.x = -a.y;
+	b.y = a.x;
+	return (b);
+}

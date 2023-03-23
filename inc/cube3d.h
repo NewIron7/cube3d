@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/23 22:21:56 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/23 22:46:39 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define W_WIDTH 1080
-# define W_HEIGHT 720
+# define W_WIDTH 1600
+# define W_HEIGHT 1000
 # define W_NAME "cube3d"
 
 # define KEY_ESC 65307
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
 
 # define C_RED 0x00FF0000
 # define C_GREEN 0x0000FF00
@@ -44,8 +46,10 @@
 
 # define WALL_SIZE 1.5
 # define DIST_COL 0.49
-# define ROT_ANGLE 0.0689066
-# define COEF_MOVE 0.25
+# define ROT_ANGLE 0.02
+# define COEF_MOVE 0.05
+# define COEF_MOVE_SIDE 0.04
+# define PLAYER_HEIGHT 0.3
 
 # define PI_6 0.5235987756
 # define PI_4 0.7853981634
@@ -59,6 +63,16 @@
 # define A_DIST -0.02564102564
 # define B_DIST 1.012820513
 # define ANGLE (M_PI)/3
+
+enum e_keys
+{
+	W_KEY,
+	A_KEY,
+	S_KEY,
+	D_KEY,
+	LEFT_KEY,
+	RIGHT_KEY
+};
 
 enum e_orient
 {
@@ -124,6 +138,7 @@ typedef struct s_app
 	t_map			map;
 	t_img			img;
 	t_pvect			player;
+	char			keys[6];
 }	t_app;
 
 void	init_struct(t_app *app);
@@ -138,11 +153,14 @@ t_dpoint	mult_dpoint(t_dpoint a, double coef);
 t_dpoint	sum_dpoint(t_dpoint a, t_dpoint b);
 void	cpy_dpoint(t_dpoint *src, t_dpoint *dest);
 t_dpoint    rotate_vect(t_dpoint *vect, double angle);
+t_dpoint	get_vect_orth(t_dpoint a);
 
 void    ft_error_mlx(t_app *app);
 void    ft_error_malloc(const void *ptr, t_app *app, char *str);
 
 int handle_key_press(int keycode, t_app *app);
+int handle_key_release(int keycode, t_app *app);
+void    do_player_move(t_app *app);
 
 int		ft_close(t_app *app);
 

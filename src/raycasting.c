@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:01:02 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/23 22:21:36 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/23 23:22:11 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,6 @@ int	get_size_w_dist(double dist)
 {
 	//return (W_HEIGHT * (A_DIST * dist + B_DIST));
 	return ((W_HEIGHT * WALL_SIZE) / dist);
-}
-
-t_dpoint	get_vect_orth(t_dpoint a)
-{
-	t_dpoint	b;
-
-	b.x = -a.y;
-	b.y = a.x;
-	return (b);
 }
 
 t_screen	get_screen_left(void)
@@ -87,7 +78,7 @@ void	print_col(int x, double dist, t_img *img, char orient)
 
 	color = get_color_by_orient(orient);
 	height = get_size_w_dist(dist);
-	top = (W_HEIGHT - height) * 0.5;
+	top = (W_HEIGHT - height) * PLAYER_HEIGHT;
 	y = -1;
 	while (++y < top)
 		put_pixel(img, x, y, C_CEILLING);
