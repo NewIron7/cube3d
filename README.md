@@ -5,7 +5,8 @@
 - [x]  Verifier algo rayons
 - [x]  Algo rayons verticaux et horizontaux
 - [x]  projections d’autant de rayons qu’il y a de pixel en largeur
-- [ ]  Collisions
+- [x]  Collisions (arret lorsqu'un mur est touche)
+- [ ]  Collisions (glissade contre le mur)
 - [ ]  Pouvoir se deplacer en faisant des roations
 - [ ]  Textures
 - [ ]  Parsing fichier

@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 08:54:52 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/22 09:44:56 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/23 22:19:39 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,33 @@ void	refresh_img(t_img *img)
 	}
 }*/
 
+static char	check_exit_map(t_dpoint move, t_map *map)
+{
+	if (move.x >= 0 && move.x < map->size.x
+		&& move.y > 0 && move.y < map->size.y)
+		return (0);
+	return (1);
+}
+
+static char	check_collisions(t_pvect *player, t_dpoint *move, t_map *map)
+{
+	t_point pmove;
+
+	(void)player;
+	pmove.x = move->x;
+	pmove.y = move->y;
+	if (map->map[pmove.y][pmove.x])
+	{/*Systeme de collisons ou l'on glisse contre le mur
+		if (map->map[pmove.y][(int)player->pos.x] == 0)
+			move->x = (int)player->pos.x;
+		else if (map->map[(int)player->pos.y][pmove.x] == 0)
+			move->y = (int)player->pos.y;
+		else*/
+			return (1);
+	}
+	return (0);
+}
+
 void	player_move_straight(t_pvect *player, t_map *map)
 {
 	t_dpoint	dir_move;
@@ -37,9 +64,9 @@ void	player_move_straight(t_pvect *player, t_map *map)
 	dir_move = mult_dpoint(player->dir, COEF_MOVE);
 	dir_move = sum_dpoint(player->pos, dir_move);
 	//check collision
-	if (dir_move.x >= 0 && dir_move.x < map->size.x
-		&& dir_move.y > 0 && dir_move.y < map->size.y)
+	if (!check_exit_map(dir_move, map) && !check_collisions(player, &dir_move, map))
 		player->pos = dir_move;
+	printf("%f, %f\n", player->pos.x, player->pos.y);
 }
 
 int	handle_key_press(int keycode, t_app *app)

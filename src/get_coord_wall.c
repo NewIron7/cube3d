@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:45:05 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/21 13:53:08 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/23 21:55:54 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ static char	is_wall_y(t_wall *wall, t_map *map)
 	if (wall->orient == NORTH)
 		wall->pos.y -= 1;
 	wall->pos.x = (int)wall->dir.x;
-	if (wall->pos.y < 0 || wall->pos.y > map->size.y
-		|| wall->pos.x < 0 || wall->pos.x > map->size.x)
+	if (wall->pos.y < 0 || wall->pos.y >= map->size.y
+		|| wall->pos.x < 0 || wall->pos.x >= map->size.x)
 		return (1);
 	if (map->map[wall->pos.y][wall->pos.x])
 		return (1);

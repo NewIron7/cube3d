@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:01:02 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/22 09:03:04 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/23 22:21:36 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	get_size_w_dist(double dist)
 {
 	//return (W_HEIGHT * (A_DIST * dist + B_DIST));
-	return ((W_HEIGHT * 2) / dist);
+	return ((W_HEIGHT * WALL_SIZE) / dist);
 }
 
 t_dpoint	get_vect_orth(t_dpoint a)
@@ -108,9 +108,9 @@ int	do_raycasting_left(t_pvect *player, t_screen *screen, t_map *map, t_img *img
 	{
 		angle = next_dir_screen_left(screen, player);
 		wall = get_coord_wall(screen->dir, player->pos, map);
-		printf("SCREEN dir: (%f, %f)\n", screen->dir.x, screen->dir.y);
-		printf("POS: (%d, %d) DIR: (%f, %f)\nORIENT:%d DIST:%f\n", wall.pos.x, wall.pos.y,
-				wall.dir.x, wall.dir.y, wall.orient, wall.dist);
+		//printf("SCREEN dir: (%f, %f)\n", screen->dir.x, screen->dir.y);
+		//printf("POS: (%d, %d) DIR: (%f, %f)\nORIENT:%d DIST:%f\n", wall.pos.x, wall.pos.y,
+		//		wall.dir.x, wall.dir.y, wall.orient, wall.dist);
 		wall.dist *= cos(angle);
 		print_col(i, wall.dist, img, wall.orient);
 		i++;

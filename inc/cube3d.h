@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/21 16:04:34 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/23 22:21:56 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 
 # define PANEL 0.5773502692
 
+# define WALL_SIZE 1.5
+# define DIST_COL 0.49
 # define ROT_ANGLE 0.0689066
 # define COEF_MOVE 0.25
 
