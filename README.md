@@ -9,6 +9,7 @@
 - [ ]  Collisions (glissade contre le mur)
 - [x]  Pouvoir se deplacer en faisant des rotations
 - [x]  Textures
+- [ ]  Sprites
 - [ ]  Parsing fichier
 - [ ]  Minimap
 - [ ]  Protection erreur malloc et mlx (avec fermeture propre #freeall)
