@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 08:54:52 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/24 08:32:15 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:16:24 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	player_move(t_pvect *player, t_map *map, char move, int speed)
 	//check collision
 	if (!check_exit_map(dir_move, map) && !check_collisions(player, &dir_move, map))
 		player->pos = dir_move;
-	printf("%f, %f\n", player->pos.x, player->pos.y);
+	//printf("%f, %f\n", player->pos.x, player->pos.y);
 }
 /*
 int	handle_key_press(int keycode, t_app *app)
@@ -134,7 +134,7 @@ int	handle_key_press(int keycode, t_app *app)
 		app->keys[E_D_KEY] = 1;
 	else if (keycode == KEY_SHIFT)
 		app->keys[E_SHIFT_KEY] = 1;
-	printf("%d\n", keycode);
+	//printf("%d\n", keycode);
 	return (0);
 }
 

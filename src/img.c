@@ -6,24 +6,25 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:21:39 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/20 19:24:11 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/24 10:24:39 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	get_color_pixel(t_img *img, int x, int y)
+unsigned int	get_color_pixel(t_img *img, int x, int y)
 {
 	int	pos;
 	unsigned int	*color_ptr;
 
 	pos = 0;
-	if (x < W_WIDTH && y < W_HEIGHT && x > 0 && y > 0)
+	if (x < img->size.x && y < img->size.y && x > 0 && y > 0)
 	{
 		pos = (x * img->bpp / 8) + (y * img->line_s);
 		color_ptr = (unsigned int *)(img->pxls + pos);
+		return (*color_ptr);
 	}
-	return (*color_ptr);
+	return (0);
 }
 
 void	put_pixel(t_img *img, int x, int y, unsigned int color)
@@ -31,7 +32,7 @@ void	put_pixel(t_img *img, int x, int y, unsigned int color)
 	int	pos;
 
 	pos = 0;
-	if (x < W_WIDTH && y < W_HEIGHT && x > 0 && y > 0)
+	if (x < img->size.x && y < img->size.y && x > 0 && y > 0)
 	{
 		pos = (x * img->bpp / 8) + (y * img->line_s);
 		img->pxls[pos] = color;

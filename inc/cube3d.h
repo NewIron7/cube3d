@@ -24,8 +24,8 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define W_WIDTH 720
-# define W_HEIGHT 480
+# define W_WIDTH 1600
+# define W_HEIGHT 900
 # define W_NAME "cube3d"
 
 # define KEY_ESC 65307
@@ -145,16 +145,19 @@ typedef struct s_app
 }	t_app;
 
 void	init_struct(t_app *app);
+
 void    new_img(t_app *app, void *mlx, int width, int height);
 void	put_pixel(t_img *img, int x, int y, unsigned int color);
-int	get_color_pixel(t_img *img, int x, int y);
+unsigned int	get_color_pixel(t_img *img, int x, int y);
+void    load_textures(t_app *app, char *filenames[4]);
 
 t_wall	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map);
-void	raycasting(t_pvect player, t_map *map, t_img *img);
+void	raycasting(t_app *app);
 void    init_raycasting(t_app *app);
 void    print_col_color(int x, double dist, t_img *img, char orient);
 int get_size_w_dist(double dist);
 int get_color_by_orient(char orient);
+void    print_wall_textured(int x, t_wall *wall, t_app *app);
 
 t_dpoint	mult_dpoint(t_dpoint a, double coef);
 t_dpoint	sum_dpoint(t_dpoint a, t_dpoint b);

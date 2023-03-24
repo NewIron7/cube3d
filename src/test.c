@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 11:22:46 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/22 09:27:00 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:06:46 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "cube3d.h"
@@ -60,9 +60,21 @@ void	init_player(t_pvect	*player)
 	player->pos.y = 2.5;
 }
 
+void	init_textures(t_app *app)
+{
+	char	*filenames[4];
+
+	filenames[0] = "textures/brick.xpm";
+	filenames[1] = "textures/metal.xpm";
+	filenames[2] = "textures/wood.xpm";
+	filenames[3] = "textures/stone.xpm";
+	load_textures(app, filenames);
+}
+
 void	init_raycasting(t_app *app)
 {
 	init_map(&app->map);
 	init_player(&app->player);
-	raycasting(app->player, &app->map, &app->img);
+	init_textures(app);
+	//raycasting(app);
 }

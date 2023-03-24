@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:01:02 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/24 09:21:35 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/24 11:04:46 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ double	next_dir_screen_right(t_screen *screen, t_pvect *player)
 	return (angle);
 }
 
-int	do_raycasting_left(t_pvect *player, t_screen *screen, t_map *map, t_img *img)
+int	do_raycasting_left(t_pvect *player, t_screen *screen, t_app *app)
 {
 	int		i;
 	t_wall	wall;
@@ -62,18 +62,19 @@ int	do_raycasting_left(t_pvect *player, t_screen *screen, t_map *map, t_img *img
 	while (screen->panel >= 0)
 	{
 		angle = next_dir_screen_left(screen, player);
-		wall = get_coord_wall(screen->dir, player->pos, map);
+		wall = get_coord_wall(screen->dir, player->pos, &app->map);
 		//printf("SCREEN dir: (%f, %f)\n", screen->dir.x, screen->dir.y);
 		//printf("POS: (%d, %d) DIR: (%f, %f)\nORIENT:%d DIST:%f\n", wall.pos.x, wall.pos.y,
 		//		wall.dir.x, wall.dir.y, wall.orient, wall.dist);
 		wall.dist *= cos(angle);
-		print_col_color(i, wall.dist, img, wall.orient);
+		//print_col_color(i, wall.dist, &app->img, wall.orient);
+		print_wall_textured(i, &wall, app);
 		i++;
 	}
 	return (i);
 }
 
-void	do_raycasting_right(t_pvect *player, t_screen *screen, t_map *map, t_img *img, int i)
+void	do_raycasting_right(t_pvect *player, t_screen *screen, t_app *app, int i)
 {
 	t_wall	wall;
 	double	angle;
@@ -81,20 +82,23 @@ void	do_raycasting_right(t_pvect *player, t_screen *screen, t_map *map, t_img *i
 	while (screen->panel <= PANEL && i < W_WIDTH)
 	{
 		angle = next_dir_screen_right(screen, player);
-		wall = get_coord_wall(screen->dir, player->pos, map);
+		wall = get_coord_wall(screen->dir, player->pos, &app->map);
 		wall.dist *= cos(-angle);
-		print_col_color(i, wall.dist, img, wall.orient);
+		//print_col_color(i, wall.dist, &app->img, wall.orient);
+		print_wall_textured(i, &wall, app);
 		i++;
 	}
 }
 
-void	raycasting(t_pvect player, t_map *map, t_img *img)
+void	raycasting(t_app *app)
 {
 	t_screen	screen;
 	int			i;
+	t_pvect		player;
 
+	player = app->player;
 	screen = get_screen_left();
-	i = do_raycasting_left(&player, &screen, map, img);
+	i = do_raycasting_left(&player, &screen, app);
 	screen = get_screen_right();
-	do_raycasting_right(&player, &screen, map, img, i);
+	do_raycasting_right(&player, &screen, app, i);
 }

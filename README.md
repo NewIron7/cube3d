@@ -8,9 +8,10 @@
 - [x]  Collisions (arret lorsqu'un mur est touche)
 - [ ]  Collisions (glissade contre le mur)
 - [x]  Pouvoir se deplacer en faisant des rotations
-- [ ]  Textures
+- [x]  Textures
 - [ ]  Parsing fichier
 - [ ]  Minimap
+- [ ]  Protection erreur malloc et mlx (avec fermeture propre #freeall)
 
 ## Algo projection de rayon
 
