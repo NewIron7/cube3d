@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 08:54:52 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/23 23:16:58 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/24 08:32:15 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,21 @@ static char	check_collisions(t_pvect *player, t_dpoint *move, t_map *map)
 	return (0);
 }
 
-void	player_move(t_pvect *player, t_map *map, char move)
+void	player_move(t_pvect *player, t_map *map, char move, int speed)
 {
 	t_dpoint	dir_move;
 
-	if (move == W_KEY)
-		dir_move = mult_dpoint(player->dir, COEF_MOVE);
-	else if (move == S_KEY)
-		dir_move = mult_dpoint(player->dir, -COEF_MOVE);
+	if (move == E_W_KEY)
+		dir_move = mult_dpoint(player->dir, COEF_MOVE * speed);
+	else if (move == E_S_KEY)
+		dir_move = mult_dpoint(player->dir, -COEF_MOVE * speed);
 	else
 	{
 		dir_move = get_vect_orth(player->dir);
-		if (move == A_KEY)
-			dir_move = mult_dpoint(dir_move, -COEF_MOVE_SIDE);
-		if (move == D_KEY)
-			dir_move = mult_dpoint(dir_move, COEF_MOVE_SIDE);
+		if (move == E_A_KEY)
+			dir_move = mult_dpoint(dir_move, -COEF_MOVE_SIDE * speed);
+		if (move == E_D_KEY)
+			dir_move = mult_dpoint(dir_move, COEF_MOVE_SIDE * speed);
 	}
 	dir_move = sum_dpoint(player->pos, dir_move);
 	//check collision
@@ -97,18 +97,23 @@ int	handle_key_press(int keycode, t_app *app)
 
 void	do_player_move(t_app *app)
 {
-	if (app->keys[W_KEY])
-		player_move(&app->player, &app->map, W_KEY);
-	if (app->keys[S_KEY])
-		player_move(&app->player, &app->map, S_KEY);
-	if (app->keys[A_KEY])
-		player_move(&app->player, &app->map, A_KEY);
-	if (app->keys[D_KEY])
-		player_move(&app->player, &app->map, D_KEY);
-	if (app->keys[LEFT_KEY])
-		app->player.dir = rotate_vect(&app->player.dir, -ROT_ANGLE);
-	if (app->keys[RIGHT_KEY])
-		app->player.dir = rotate_vect(&app->player.dir, ROT_ANGLE);
+	int	speed;
+
+	speed = 1;
+	if (app->keys[E_SHIFT_KEY])
+		speed = 2;
+	if (app->keys[E_W_KEY])
+		player_move(&app->player, &app->map, E_W_KEY, speed);
+	if (app->keys[E_S_KEY])
+		player_move(&app->player, &app->map, E_S_KEY, speed);
+	if (app->keys[E_A_KEY])
+		player_move(&app->player, &app->map, E_A_KEY, speed);
+	if (app->keys[E_D_KEY])
+		player_move(&app->player, &app->map, E_D_KEY, speed);
+	if (app->keys[E_LEFT_KEY])
+		app->player.dir = rotate_vect(&app->player.dir, -ROT_ANGLE * speed);
+	if (app->keys[E_RIGHT_KEY])
+		app->player.dir = rotate_vect(&app->player.dir, ROT_ANGLE * speed);
 }
 
 int	handle_key_press(int keycode, t_app *app)
@@ -116,33 +121,38 @@ int	handle_key_press(int keycode, t_app *app)
 	if (keycode == KEY_ESC)
 		ft_close(app);
 	else if (keycode == KEY_LEFT)
-		app->keys[LEFT_KEY] = 1;
+		app->keys[E_LEFT_KEY] = 1;
 	else if (keycode == KEY_RIGHT)
-		app->keys[RIGHT_KEY] = 1;
+		app->keys[E_RIGHT_KEY] = 1;
 	else if (keycode == 'w')
-		app->keys[W_KEY] = 1;
+		app->keys[E_W_KEY] = 1;
 	else if (keycode == 's')
-		app->keys[S_KEY] = 1;
+		app->keys[E_S_KEY] = 1;
 	else if (keycode == 'a')
-		app->keys[A_KEY] = 1;
+		app->keys[E_A_KEY] = 1;
 	else if (keycode == 'd')
-		app->keys[D_KEY] = 1;
+		app->keys[E_D_KEY] = 1;
+	else if (keycode == KEY_SHIFT)
+		app->keys[E_SHIFT_KEY] = 1;
+	printf("%d\n", keycode);
 	return (0);
 }
 
 int	handle_key_release(int keycode, t_app *app)
 {
 	if (keycode == KEY_LEFT)
-		app->keys[LEFT_KEY] = 0;
+		app->keys[E_LEFT_KEY] = 0;
 	else if (keycode == KEY_RIGHT)
-		app->keys[RIGHT_KEY] = 0;
+		app->keys[E_RIGHT_KEY] = 0;
 	else if (keycode == 'w')
-		app->keys[W_KEY] = 0;
+		app->keys[E_W_KEY] = 0;
 	else if (keycode == 's')
-		app->keys[S_KEY] = 0;
+		app->keys[E_S_KEY] = 0;
 	else if (keycode == 'a')
-		app->keys[A_KEY] = 0;
+		app->keys[E_A_KEY] = 0;
 	else if (keycode == 'd')
-		app->keys[D_KEY] = 0;
+		app->keys[E_D_KEY] = 0;
+	else if (keycode == KEY_SHIFT)
+		app->keys[E_SHIFT_KEY] = 0;
 	return (0);
 }

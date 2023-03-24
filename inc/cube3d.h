@@ -24,13 +24,14 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define W_WIDTH 1600
-# define W_HEIGHT 1000
+# define W_WIDTH 720
+# define W_HEIGHT 480
 # define W_NAME "cube3d"
 
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
+# define KEY_SHIFT 65505
 
 # define C_RED 0x00FF0000
 # define C_GREEN 0x0000FF00
@@ -39,7 +40,7 @@
 # define C_SOUTH 0x00783f04//dark brow
 # define C_EAST 0x00f1c232 //yellow
 # define C_WEST	0x007f6000 //brown
-# define C_GROUND 0x0093c47d //green
+# define C_GROUND 0x009b7653 //dirt
 # define C_CEILLING 0x00282130 //black
 
 # define PANEL 0.5773502692
@@ -66,12 +67,13 @@
 
 enum e_keys
 {
-	W_KEY,
-	A_KEY,
-	S_KEY,
-	D_KEY,
-	LEFT_KEY,
-	RIGHT_KEY
+	E_W_KEY,
+	E_A_KEY,
+	E_S_KEY,
+	E_D_KEY,
+	E_LEFT_KEY,
+	E_RIGHT_KEY,
+	E_SHIFT_KEY
 };
 
 enum e_orient
@@ -139,15 +141,20 @@ typedef struct s_app
 	t_img			img;
 	t_pvect			player;
 	char			keys[6];
+	t_img			textures[4];
 }	t_app;
 
 void	init_struct(t_app *app);
 void    new_img(t_app *app, void *mlx, int width, int height);
-void	put_pixel(t_img *img, int x, int y, int color);
+void	put_pixel(t_img *img, int x, int y, unsigned int color);
+int	get_color_pixel(t_img *img, int x, int y);
 
 t_wall	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map);
 void	raycasting(t_pvect player, t_map *map, t_img *img);
 void    init_raycasting(t_app *app);
+void    print_col_color(int x, double dist, t_img *img, char orient);
+int get_size_w_dist(double dist);
+int get_color_by_orient(char orient);
 
 t_dpoint	mult_dpoint(t_dpoint a, double coef);
 t_dpoint	sum_dpoint(t_dpoint a, t_dpoint b);

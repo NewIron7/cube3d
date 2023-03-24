@@ -6,17 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:01:02 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/23 23:22:11 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/24 09:21:35 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-int	get_size_w_dist(double dist)
-{
-	//return (W_HEIGHT * (A_DIST * dist + B_DIST));
-	return ((W_HEIGHT * WALL_SIZE) / dist);
-}
 
 t_screen	get_screen_left(void)
 {
@@ -58,36 +52,6 @@ double	next_dir_screen_right(t_screen *screen, t_pvect *player)
 	return (angle);
 }
 
-int	get_color_by_orient(char orient)
-{
-	if (orient == NORTH)
-		return (C_NORTH);
-	if (orient == SOUTH)
-		return (C_SOUTH);
-	if (orient == EAST)
-		return (C_EAST);
-	return (C_WEST);
-}
-
-void	print_col(int x, double dist, t_img *img, char orient)
-{
-	int	height;
-	int	top;
-	int	y;
-	int	color;
-
-	color = get_color_by_orient(orient);
-	height = get_size_w_dist(dist);
-	top = (W_HEIGHT - height) * PLAYER_HEIGHT;
-	y = -1;
-	while (++y < top)
-		put_pixel(img, x, y, C_CEILLING);
-	while (height-- && y < img->size.y)
-		put_pixel(img, x, y++, color);
-	while (y < img->size.y)
-		put_pixel(img, x, y++, C_GROUND);
-}
-
 int	do_raycasting_left(t_pvect *player, t_screen *screen, t_map *map, t_img *img)
 {
 	int		i;
@@ -103,7 +67,7 @@ int	do_raycasting_left(t_pvect *player, t_screen *screen, t_map *map, t_img *img
 		//printf("POS: (%d, %d) DIR: (%f, %f)\nORIENT:%d DIST:%f\n", wall.pos.x, wall.pos.y,
 		//		wall.dir.x, wall.dir.y, wall.orient, wall.dist);
 		wall.dist *= cos(angle);
-		print_col(i, wall.dist, img, wall.orient);
+		print_col_color(i, wall.dist, img, wall.orient);
 		i++;
 	}
 	return (i);
@@ -119,7 +83,7 @@ void	do_raycasting_right(t_pvect *player, t_screen *screen, t_map *map, t_img *i
 		angle = next_dir_screen_right(screen, player);
 		wall = get_coord_wall(screen->dir, player->pos, map);
 		wall.dist *= cos(-angle);
-		print_col(i, wall.dist, img, wall.orient);
+		print_col_color(i, wall.dist, img, wall.orient);
 		i++;
 	}
 }

@@ -21,6 +21,7 @@ SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/img.c\
 	  $(SRC_DIR)/get_coord_wall.c\
 	  $(SRC_DIR)/raycasting.c\
+	  $(SRC_DIR)/raycasting_utils.c\
 	  $(SRC_DIR)/point.c\
 	  $(SRC_DIR)/key_handle.c\
 	  $(SRC_DIR)/test.c\

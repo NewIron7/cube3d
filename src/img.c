@@ -12,7 +12,21 @@
 
 #include "cube3d.h"
 
-void	put_pixel(t_img *img, int x, int y, int color)
+int	get_color_pixel(t_img *img, int x, int y)
+{
+	int	pos;
+	unsigned int	*color_ptr;
+
+	pos = 0;
+	if (x < W_WIDTH && y < W_HEIGHT && x > 0 && y > 0)
+	{
+		pos = (x * img->bpp / 8) + (y * img->line_s);
+		color_ptr = (unsigned int *)(img->pxls + pos);
+	}
+	return (*color_ptr);
+}
+
+void	put_pixel(t_img *img, int x, int y, unsigned int color)
 {
 	int	pos;
 
