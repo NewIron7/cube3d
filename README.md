@@ -16,4 +16,6 @@
 
 ## Algo projection de rayon
 
-…
+![Panel](pictures/Panel.png)
+
+![Step](pictures/Step.png)
