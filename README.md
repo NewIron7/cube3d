@@ -19,3 +19,7 @@
 ![Panel](pictures/Panel.png)
 
 ![Step](pictures/Step.png)
+
+Utilisation d'une liste chainee pour la gestion des sprites.
+Chaque rayon lance retourne une liste chaine avec l'ensemble des elements
+trouve sur sa trajectoire trie du plus lointain au plus proche.
