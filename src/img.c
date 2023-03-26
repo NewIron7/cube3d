@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:21:39 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/24 10:24:39 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/26 11:23:06 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ unsigned int	get_color_pixel(t_img *img, int x, int y)
 	unsigned int	*color_ptr;
 
 	pos = 0;
-	if (x < img->size.x && y < img->size.y && x > 0 && y > 0)
+	if (x < img->size.x && y < img->size.y && x >= 0 && y >= 0)
 	{
 		pos = (x * img->bpp / 8) + (y * img->line_s);
 		color_ptr = (unsigned int *)(img->pxls + pos);

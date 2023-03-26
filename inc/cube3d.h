@@ -24,8 +24,8 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define W_WIDTH 1600
-# define W_HEIGHT 900
+# define W_WIDTH 1280
+# define W_HEIGHT 720
 # define W_NAME "cube3d"
 
 # define KEY_ESC 65307
