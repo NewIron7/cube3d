@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:27:08 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/24 11:05:28 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:07:58 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ int	main(int argc, char **argv)
 	mlx_hook(app.win_ptr, 17, 0, ft_close, &app);
 	mlx_hook(app.win_ptr, 2, 1L << 0, handle_key_press, &app);
 	mlx_hook(app.win_ptr, 3, 1L << 1, handle_key_release, &app);
+	mlx_do_sync(app.mlx_ptr);
 	mlx_loop(app.mlx_ptr);
 	return (0);
 }

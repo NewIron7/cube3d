@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 08:54:52 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/24 11:16:24 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/03/26 15:41:29 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	check_collisions(t_pvect *player, t_dpoint *move, t_map *map)
 	pmove.x = move->x;
 	pmove.y = move->y;
 	if (map->map[pmove.y][pmove.x])
-	{/*Systeme de collisons ou l'on glisse contre le mur
+	{/*//Systeme de collisons ou l'on glisse contre le mur
 		if (map->map[pmove.y][(int)player->pos.x] == 0)
 			move->x = (int)player->pos.x;
 		else if (map->map[(int)player->pos.y][pmove.x] == 0)
