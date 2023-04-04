@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/23 22:46:39 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/04/04 17:48:30 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define ROT_ANGLE 0.02
 # define COEF_MOVE 0.05
 # define COEF_MOVE_SIDE 0.04
-# define PLAYER_HEIGHT 0.3
+# define PLAYER_HEIGHT 0.5
 
 # define PI_6 0.5235987756
 # define PI_4 0.7853981634
@@ -140,7 +140,7 @@ typedef struct s_app
 	t_map			map;
 	t_img			img;
 	t_pvect			player;
-	char			keys[6];
+	char			keys[7];
 	t_img			textures[4];
 }	t_app;
 
