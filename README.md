@@ -23,3 +23,6 @@
 Utilisation d'une liste chainee pour la gestion des sprites.
 Chaque rayon lance retourne une liste chaine avec l'ensemble des elements
 trouve sur sa trajectoire trie du plus lointain au plus proche.
+
+## Algo projection rayon pour le sol
+Calcul des coordonnes theoriques du sol, recuperation de la partie decimal pour la texture.
