@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 08:37:44 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/24 12:19:51 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:15:28 by hboissel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,7 @@ static t_point	get_pos_pxl_texture(t_img *texture, t_wall *wall, int y)
 	t_point	pos;
 	double	coef;
 
-	//if (get_size_w_dist(wall->dist) > texture->size.y)
 	pos.y = y * ((double) texture->size.y / get_size_w_dist(wall->dist));
-	//else
-	//	pos.y = y * (texture->size.y / get_size_w_dist(wall->dist));
 	if (wall->orient == NORTH || wall->orient == SOUTH)
 		coef = (wall->dir.x - (int)wall->dir.x);
 	else

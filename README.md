@@ -26,3 +26,5 @@ trouve sur sa trajectoire trie du plus lointain au plus proche.
 
 ## Algo projection rayon pour le sol
 Calcul des coordonnes theoriques du sol, recuperation de la partie decimal pour la texture.
+![Floor_1](pictures/floor_1.png)
+![Floor_2](pictures/floor_2.png)
