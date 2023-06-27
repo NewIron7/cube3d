@@ -6,11 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 11:23:09 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/22 09:19:52 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:12:47 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 void	cpy_dpoint(t_dpoint *src, t_dpoint *dest)
 {

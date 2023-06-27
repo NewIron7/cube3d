@@ -6,11 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 08:54:52 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/26 15:41:29 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:12:42 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 /*
 void	refresh_img(t_img *img)
 {

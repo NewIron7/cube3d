@@ -1,15 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   raycasting_easy.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 23:58:47 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/24 08:52:37 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:13:00 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cube3d.h"
+
+#include "cub3d.h"
 
 void	init_dir_step(t_dpoint *dir, t_pvect *player, double *step)
 {

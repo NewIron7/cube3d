@@ -6,11 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:04:39 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/20 19:26:33 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:12:17 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 void	ft_error_mlx(t_app *app)
 {

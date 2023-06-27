@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/04/04 17:48:30 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:11:43 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBE3D_H
-# define CUBE3D_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -26,7 +26,7 @@
 
 # define W_WIDTH 1280
 # define W_HEIGHT 720
-# define W_NAME "cube3d"
+# define W_NAME "cub3d"
 
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
@@ -41,7 +41,7 @@
 # define C_EAST 0x00f1c232 //yellow
 # define C_WEST	0x007f6000 //brown
 # define C_GROUND 0x009b7653 //dirt
-# define C_CEILLING 0x00282130 //black
+# define C_CEILING 0x00282130 //black
 
 # define PANEL 0.5773502692
 
@@ -175,4 +175,5 @@ void    do_player_move(t_app *app);
 int		ft_close(t_app *app);
 
 void	test_get_coord_wall(t_img *img);
+
 #endif

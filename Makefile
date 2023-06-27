@@ -6,11 +6,11 @@
 #    By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 18:05:23 by hboissel          #+#    #+#              #
-#    Updated: 2023/03/21 10:09:08 by hboissel         ###   ########.fr        #
+#    Updated: 2023/06/27 10:28:02 by ddelhalt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = cube3d
+NAME = cub3d
 
 SRC_DIR = src
 

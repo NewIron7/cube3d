@@ -6,11 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:24:47 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/24 11:15:19 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:13:13 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 static void	load_xpm_texture(t_app *app, char *filename, int orient)
 {

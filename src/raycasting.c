@@ -6,11 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 14:01:02 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/26 11:53:57 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:12:49 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 t_screen	get_screen_left(void)
 {

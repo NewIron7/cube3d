@@ -6,11 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:57:05 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/24 10:32:38 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:12:40 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 void	init_struct(t_app *app)
 {

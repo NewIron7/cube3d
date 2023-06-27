@@ -6,10 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 11:22:46 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/26 15:37:15 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:13:10 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "cube3d.h"
+
+#include "cub3d.h"
 
 #define MAP_WIDTH 24
 #define MAP_HEIGHT 10

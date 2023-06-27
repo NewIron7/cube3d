@@ -6,11 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 08:37:44 by hboissel          #+#    #+#             */
-/*   Updated: 2023/04/04 18:15:28 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:13:38 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 int	get_size_w_dist(double dist)
 {
@@ -55,7 +55,7 @@ void	print_wall_textured(int x, t_wall *wall, t_app *app)
 	top = (W_HEIGHT - height) * PLAYER_HEIGHT;
 	y = -1;
 	while (++y < top && app->img.size.y)
-		put_pixel(&app->img, x, y, C_CEILLING);
+		put_pixel(&app->img, x, y, C_CEILING);
 	while (height-- && y < app->img.size.y)
 	{
 		color = get_color_pxl_texture(&app->textures[(int)wall->orient], wall, y - top);
@@ -78,7 +78,7 @@ void	print_col_color(int x, double dist, t_img *img, char orient)
 	top = (W_HEIGHT - height) * PLAYER_HEIGHT;
 	y = -1;
 	while (++y < top)
-		put_pixel(img, x, y, C_CEILLING);
+		put_pixel(img, x, y, C_CEILING);
 	while (height-- && y < img->size.y)
 		put_pixel(img, x, y++, color);
 	while (y < img->size.y)

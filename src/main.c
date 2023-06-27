@@ -6,11 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:27:08 by hboissel          #+#    #+#             */
-/*   Updated: 2023/03/26 15:07:58 by hboissel         ###   ########.fr       */
+/*   Updated: 2023/06/27 11:12:44 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube3d.h"
+#include "cub3d.h"
 
 int	ft_close(t_app *app)
 {
