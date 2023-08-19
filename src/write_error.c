@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   write_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 13:36:15 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/07/27 14:18:59 by ddelhalt         ###   ########.fr       */
+/*   Created: 2023/06/27 13:25:42 by ddelhalt          #+#    #+#             */
+/*   Updated: 2023/06/27 13:25:44 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	main(int argc, char *argv[])
+int	write_error(char *err)
 {
-	t_app	*app;
-
-	if (argc != 2)
+	write(2, "Error\n", 6);
+	if (err)
 	{
-		write_error("Usage : ./cub3d map.cub");
-		return (EXIT_FAILURE);
+		write(2, err, ft_strlen(err));
+		write(2, "\n", 1);
 	}
-	app = read_file(argv[1]);
-	if (!app)
-		return (EXIT_FAILURE);
-	init_raycasting(app);
-	return (EXIT_SUCCESS);
+	return (0);
 }

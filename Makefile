@@ -6,7 +6,7 @@
 #    By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 18:05:23 by hboissel          #+#    #+#              #
-#    Updated: 2023/06/27 10:28:02 by ddelhalt         ###   ########.fr        #
+#    Updated: 2023/06/27 13:56:56 by ddelhalt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRC_DIR = src
 BIN_DIR = obj
 
 SRC = $(SRC_DIR)/main.c\
-	  $(SRC_DIR)/init.c\
+	  $(SRC_DIR)/init_raycasting.c\
 	  $(SRC_DIR)/img.c\
 	  $(SRC_DIR)/get_coord_wall.c\
 	  $(SRC_DIR)/raycasting.c\
@@ -25,7 +25,12 @@ SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/point.c\
 	  $(SRC_DIR)/textures.c\
 	  $(SRC_DIR)/key_handle.c\
-	  $(SRC_DIR)/test.c\
+	  $(SRC_DIR)/check_line.c\
+	  $(SRC_DIR)/load_file.c\
+	  $(SRC_DIR)/load_map.c\
+	  $(SRC_DIR)/process_setting.c\
+	  $(SRC_DIR)/read_file.c\
+	  $(SRC_DIR)/write_error.c\
 	  $(SRC_DIR)/error.c
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)

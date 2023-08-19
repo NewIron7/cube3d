@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/06/27 11:11:43 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:42:19 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@
 # define C_GROUND 0x009b7653 //dirt
 # define C_CEILING 0x00282130 //black
 
+# define DFL_TXTR_NO "textures/brick.xpm"
+# define DFL_TXTR_SO "textures/metal.xpm"
+# define DFL_TXTR_WE "textures/wood.xpm"
+# define DFL_TXTR_EA "textures/stone.xpm"
+
+# define FILE_EXT ".cub"
+
+# define REALLOC_BUFF_SIZE 10
+
 # define PANEL 0.5773502692
 
 # define WALL_SIZE 1.5
@@ -65,6 +74,9 @@
 # define B_DIST 1.012820513
 # define ANGLE (M_PI)/3
 
+# define CHAR_WALL '1'
+# define CHAR_BLANK '0'
+
 enum e_keys
 {
 	E_W_KEY,
@@ -82,6 +94,18 @@ enum e_orient
 	SOUTH,
 	WEST,
 	EAST
+};
+
+enum e_types
+{
+	FLOOR,
+	CEILING,
+	LINE_NORTH,
+	LINE_SOUTH,
+	LINE_WEST,
+	LINE_EAST,
+	MAP,
+	EMPTY
 };
 
 typedef struct s_dpoint
@@ -142,9 +166,10 @@ typedef struct s_app
 	t_pvect			player;
 	char			keys[7];
 	t_img			textures[4];
+	unsigned int	colors[2];
 }	t_app;
 
-void	init_struct(t_app *app);
+int		init_raycasting(t_app *app);
 
 void    new_img(t_app *app, void *mlx, int width, int height);
 void	put_pixel(t_img *img, int x, int y, unsigned int color);
@@ -153,8 +178,7 @@ void    load_textures(t_app *app, char *filenames[4]);
 
 t_wall	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map);
 void	raycasting(t_app *app);
-void    init_raycasting(t_app *app);
-void    print_col_color(int x, double dist, t_img *img, char orient);
+void    print_col_color(int x, double dist, t_img *img, char orient, t_app *app);
 int get_size_w_dist(double dist);
 int get_color_by_orient(char orient);
 void    print_wall_textured(int x, t_wall *wall, t_app *app);
@@ -175,5 +199,12 @@ void    do_player_move(t_app *app);
 int		ft_close(t_app *app);
 
 void	test_get_coord_wall(t_img *img);
+
+t_app	*read_file(char *filename);
+int		load_file(t_app *app, int fd, char *textures[]);
+int		check_line(char *line, char *prev, t_app *app);
+int		load_map(char *line, int fd, t_app *app);
+int		process_setting(char *line, int type, t_app *app, char *textures[]);
+int		write_error(char *err);
 
 #endif

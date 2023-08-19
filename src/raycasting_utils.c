@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 08:37:44 by hboissel          #+#    #+#             */
-/*   Updated: 2023/06/27 11:13:38 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:42:26 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	print_wall_textured(int x, t_wall *wall, t_app *app)
 	top = (W_HEIGHT - height) * PLAYER_HEIGHT;
 	y = -1;
 	while (++y < top && app->img.size.y)
-		put_pixel(&app->img, x, y, C_CEILING);
+		put_pixel(&app->img, x, y, app->colors[CEILING]);
 	while (height-- && y < app->img.size.y)
 	{
 		color = get_color_pxl_texture(&app->textures[(int)wall->orient], wall, y - top);
@@ -63,10 +63,10 @@ void	print_wall_textured(int x, t_wall *wall, t_app *app)
 		y++;
 	}
 	while (y < app->img.size.y)
-		put_pixel(&app->img, x, y++, C_GROUND);
+		put_pixel(&app->img, x, y++, app->colors[FLOOR]);
 }
 
-void	print_col_color(int x, double dist, t_img *img, char orient)
+void	print_col_color(int x, double dist, t_img *img, char orient, t_app *app)
 {
 	int	height;
 	int	top;
@@ -78,11 +78,11 @@ void	print_col_color(int x, double dist, t_img *img, char orient)
 	top = (W_HEIGHT - height) * PLAYER_HEIGHT;
 	y = -1;
 	while (++y < top)
-		put_pixel(img, x, y, C_CEILING);
+		put_pixel(img, x, y, app->colors[CEILING]);
 	while (height-- && y < img->size.y)
 		put_pixel(img, x, y++, color);
 	while (y < img->size.y)
-		put_pixel(img, x, y++, C_GROUND);
+		put_pixel(img, x, y++, app->colors[FLOOR]);
 }
 
 int	get_color_by_orient(char orient)

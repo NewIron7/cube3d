@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:24:47 by hboissel          #+#    #+#             */
-/*   Updated: 2023/06/27 11:13:13 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/06/27 15:20:44 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static void	load_xpm_texture(t_app *app, char *filename, int orient)
 			&app->textures[orient].endian);
 }
 
+/*
 static char	check_extension(char *filename)
 {
 	int		i;
@@ -34,14 +35,17 @@ static char	check_extension(char *filename)
 		return (1);
 	return (0);
 }
+*/
 
-void	load_textures(t_app *app, char *filenames[4])
+void	load_textures(t_app *app, char *filenames[])
 {
 	int	i;
 
 	i = 0;
 	while (i < 4)
 	{
+		load_xpm_texture(app, filenames[i], i);
+		/*
 		if (check_extension(filenames[i]))
 			load_xpm_texture(app, filenames[i], i);
 		else
@@ -49,6 +53,7 @@ void	load_textures(t_app *app, char *filenames[4])
 			printf("ERROR: filename not valid\n");
 			ft_close(app);
 		}
+		*/
 		i++;
 	}
 }

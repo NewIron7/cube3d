@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:45:05 by hboissel          #+#    #+#             */
-/*   Updated: 2023/06/27 11:12:34 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:09:20 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	is_wall_x(t_wall *wall, t_map *map)
 	if (wall->pos.y < 0 || wall->pos.y >= map->size.y
 		|| wall->pos.x < 0 || wall->pos.x >= map->size.x)
 		return (1);
-	if (map->map[wall->pos.y][wall->pos.x])
+	if (map->map[wall->pos.y][wall->pos.x] == CHAR_WALL)
 		return (1);
 	else
 		return (0);
@@ -98,7 +98,7 @@ static char	is_wall_y(t_wall *wall, t_map *map)
 	if (wall->pos.y < 0 || wall->pos.y >= map->size.y
 		|| wall->pos.x < 0 || wall->pos.x >= map->size.x)
 		return (1);
-	if (map->map[wall->pos.y][wall->pos.x])
+	if (map->map[wall->pos.y][wall->pos.x] == CHAR_WALL)
 		return (1);
 	else
 		return (0);
