@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:25:37 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/20 15:17:04 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 16:24:53 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ int	load_map(char *line, int fd, t_app *app)
 			free(line);
 			return (load_map_error(&app->map));
 		}
-		if (!(app->map.size.y % REALLOC_BUFF_SIZE) && !map_realloc(&app->map.map, app->map.size.y))
+		if (!(app->map.size.y % REALLOC_BUFF_SIZE)
+			&& !map_realloc(&app->map.map, app->map.size.y))
 			return (load_map_error(&app->map));
 		app->map.map[app->map.size.y++] = remove_newline(line);
 		prev = line;

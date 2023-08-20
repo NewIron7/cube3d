@@ -6,29 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 08:54:52 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/19 18:12:13 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 20:00:37 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-/*
-void	refresh_img(t_img *img)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < img->size.y)
-	{
-		i = 0;
-		while (x < img->size.x)
-		{
-			put_pixel(img, x, y, 0x00000000);
-			i++;
-		}
-		y++;
-	}
-}*/
 
 static char	check_exit_map(t_dpoint move, t_map *map)
 {
@@ -38,23 +20,26 @@ static char	check_exit_map(t_dpoint move, t_map *map)
 	return (1);
 }
 
-static char	check_collisions(t_pvect *player, t_dpoint *move, t_map *map)
+static t_dpoint	update_pos(t_dpoint pos, t_dpoint move, char **map)
 {
-	t_point pmove;
+	t_dpoint	new_pos;
+	double		body_size;
 
-	(void)player;
-	pmove.x = move->x;
-	pmove.y = move->y;
-	if (map->map[pmove.y][pmove.x] == CHAR_WALL)
-	{/*//Systeme de collisons ou l'on glisse contre le mur
-		if (map->map[pmove.y][(int)player->pos.x] == 0)
-			move->x = (int)player->pos.x;
-		else if (map->map[(int)player->pos.y][pmove.x] == 0)
-			move->y = (int)player->pos.y;
-		else*/
-			return (1);
-	}
-	return (0);
+	body_size = BODY_SIZE;
+	if (move.x < 0)
+		body_size = -body_size;
+	new_pos.x = pos.x;
+	if (map[(int) (pos.y + BODY_SIZE)][(int) (pos.x + move.x + body_size)] != CHAR_WALL
+		&& map[(int) (pos.y - BODY_SIZE)][(int) (pos.x + move.x + body_size)] != CHAR_WALL)
+		new_pos.x += move.x;
+	body_size = BODY_SIZE;
+	if (move.y < 0)
+		body_size = -body_size;
+	new_pos.y = pos.y;
+	if (map[(int) (pos.y + move.y + body_size)][(int) (pos.x + BODY_SIZE)] != CHAR_WALL
+		&& map[(int) (pos.y + move.y + body_size)][(int) (pos.x - BODY_SIZE)] != CHAR_WALL)
+		new_pos.y += move.y;
+	return (new_pos);
 }
 
 void	player_move(t_pvect *player, t_map *map, char move, int speed)
@@ -73,27 +58,12 @@ void	player_move(t_pvect *player, t_map *map, char move, int speed)
 		if (move == E_D_KEY)
 			dir_move = mult_dpoint(dir_move, COEF_MOVE_SIDE * speed);
 	}
-	dir_move = sum_dpoint(player->pos, dir_move);
+	player->pos = update_pos(player->pos, dir_move, map->map);
 	//check collision
-	if (!check_exit_map(dir_move, map) && !check_collisions(player, &dir_move, map))
-		player->pos = dir_move;
-	//printf("%f, %f\n", player->pos.x, player->pos.y);
+	if (!check_exit_map(dir_move, map)
+		&& map->map[(int) dir_move.y][(int) dir_move.x] != CHAR_WALL)
+		;
 }
-/*
-int	handle_key_press(int keycode, t_app *app)
-{
-	if (keycode == KEY_ESC)
-		ft_close(app);
-	else if (keycode == 65361)
-		app->player.dir = rotate_vect(&app->player.dir, -ROT_ANGLE);
-	else if (keycode == 65363)
-		app->player.dir = rotate_vect(&app->player.dir, ROT_ANGLE);
-	else if (keycode == 'w')
-		player_move_straight(&app->player, &app->map);
-	raycasting(app->player, &app->map, &app->img);
-	mlx_put_image_to_window(app->mlx_ptr, app->win_ptr, app->img.ptr, 0, 0);
-	return (0);
-}*/
 
 void	do_player_move(t_app *app)
 {
@@ -134,7 +104,6 @@ int	handle_key_press(int keycode, t_app *app)
 		app->keys[E_D_KEY] = 1;
 	else if (keycode == KEY_SHIFT)
 		app->keys[E_SHIFT_KEY] = 1;
-	//printf("%d\n", keycode);
 	return (0);
 }
 

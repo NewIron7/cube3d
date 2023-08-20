@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:25:17 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/20 15:19:28 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 15:33:28 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,27 @@ static int	check_extension(char *filename)
 	return (1);
 }
 
+static int	start_mlx(t_app *app, char *textures[])
+{
+	app->mlx_ptr = mlx_init();
+	if (!app->mlx_ptr)
+	{
+		free_textures(textures);
+		free_map(app->map.map);
+		return (write_error("MLX ERROR"));
+	}
+	if (!load_textures(app, textures))
+	{
+		free_textures(textures);
+		free_map(app->map.map);
+		mlx_destroy_display(app->mlx_ptr);
+		free(app->mlx_ptr);
+		return (0);
+	}
+	free_textures(textures);
+	return (1);
+}
+
 int	read_file(char *filename, t_app *app)
 {
 	int		fd;
@@ -87,21 +108,5 @@ int	read_file(char *filename, t_app *app)
 		return (0);
 	}
 	close(fd);
-	app->mlx_ptr = mlx_init();
-	if (!app->mlx_ptr)
-	{
-		free_textures(textures);
-		free_map(app->map.map);
-		return (write_error("MLX ERROR"));
-	}
-	if (!load_textures(app, textures))
-	{
-		free_textures(textures);
-		free_map(app->map.map);
-		mlx_destroy_display(app->mlx_ptr);
-		free(app->mlx_ptr);
-		return (0);
-	}
-	free_textures(textures);
-	return (1);
+	return (start_mlx(app, textures));
 }

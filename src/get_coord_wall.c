@@ -6,103 +6,11 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:45:05 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/19 18:09:20 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 16:50:22 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static double	get_first_step_x(t_pvect vect)
-{
-	double	step;
-
-	if (vect.dir.x > 0)
-		step = ((int)vect.pos.x + 1) - vect.pos.x;
-	else if (vect.dir.x < 0)
-	{
-		step = ((int)vect.pos.x) - vect.pos.x;
-		if (step == 0)
-			step = -1;
-	}
-	else
-		step = 0;
-	return (step);
-}
-
-static double	get_first_step_y(t_pvect vect)
-{
-	double	step;
-
-	if (vect.dir.y > 0)
-		step = ((int)vect.pos.y + 1) - vect.pos.y;
-	else if (vect.dir.y < 0)
-	{
-		step = ((int)vect.pos.y) - vect.pos.y;
-		if (step == 0)
-			step = -1;
-	}
-	else
-		step = 0;
-	return (step);
-}
-
-static void	init_player(t_pvect *player, t_dpoint dir, t_dpoint pos)
-{
-	cpy_dpoint(&pos, &player->pos);
-	cpy_dpoint(&dir, &player->dir);
-}
-
-static t_dpoint	next_wall_x(t_dpoint *pos, double n, double step)
-{
-	t_dpoint	wall;
-
-	wall.x = step + pos->x;
-	wall.y = (n * step) + pos->y;
-	pos->x = wall.x;
-	pos->y = wall.y;
-	return (wall);
-}
-
-static t_dpoint	next_wall_y(t_dpoint *pos, double n, double step)
-{
-	t_dpoint	wall;
-
-	wall.y = step + pos->y;
-	wall.x = (n * step) + pos->x;
-	pos->x = wall.x;
-	pos->y = wall.y;
-	return (wall);
-}
-
-static char	is_wall_x(t_wall *wall, t_map *map)
-{
-	wall->pos.x = (int)wall->dir.x;
-	if (wall->orient == WEST)
-		wall->pos.x -= 1;
-	wall->pos.y = (int)wall->dir.y;
-	if (wall->pos.y < 0 || wall->pos.y >= map->size.y
-		|| wall->pos.x < 0 || wall->pos.x >= map->size.x)
-		return (1);
-	if (map->map[wall->pos.y][wall->pos.x] == CHAR_WALL)
-		return (1);
-	else
-		return (0);
-}
-
-static char	is_wall_y(t_wall *wall, t_map *map)
-{
-	wall->pos.y = (int)wall->dir.y;
-	if (wall->orient == NORTH)
-		wall->pos.y -= 1;
-	wall->pos.x = (int)wall->dir.x;
-	if (wall->pos.y < 0 || wall->pos.y >= map->size.y
-		|| wall->pos.x < 0 || wall->pos.x >= map->size.x)
-		return (1);
-	if (map->map[wall->pos.y][wall->pos.x] == CHAR_WALL)
-		return (1);
-	else
-		return (0);
-}
 
 static void	get_coord_wall_x(t_pvect player, t_map *map, t_wall *wall)
 {
@@ -190,23 +98,14 @@ void	get_coord_wall_straight_x(t_pvect player, t_map *map, t_wall *wall)
 	}
 }
 
-double	get_dist_wall(t_pvect *player, t_wall *wall)
-{
-	double	dist;
-
-	dist = (wall->dir.x - player->pos.x) * (wall->dir.x - player->pos.x);
-	dist += (wall->dir.y - player->pos.y) * (wall->dir.y - player->pos.y);
-	dist = sqrt(dist);
-	return (dist);
-}
-
 t_wall	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map)
 {
 	t_pvect	player;
 	t_wall	tmp;
 	t_wall	wall;
 
-	init_player(&player, dir, pos);
+	cpy_dpoint(&pos, &player.pos);
+	cpy_dpoint(&dir, &player.dir);
 	if (player.dir.x == 0)
 		get_coord_wall_straight_y(player, map, &wall);
 	else if (player.dir.y == 0)

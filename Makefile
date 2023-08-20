@@ -6,7 +6,7 @@
 #    By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 18:05:23 by hboissel          #+#    #+#              #
-#    Updated: 2023/08/20 15:18:42 by ddelhalt         ###   ########.fr        #
+#    Updated: 2023/08/20 16:54:10 by ddelhalt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,11 @@ SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/read_file.c\
 	  $(SRC_DIR)/write_error.c\
 	  $(SRC_DIR)/error.c\
-	  $(SRC_DIR)/free_map.c
+	  $(SRC_DIR)/free_map.c\
+	  $(SRC_DIR)/get_dist_wall.c\
+	  $(SRC_DIR)/get_first_step.c\
+	  $(SRC_DIR)/next_wall.c\
+	  $(SRC_DIR)/is_wall.c\
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
 

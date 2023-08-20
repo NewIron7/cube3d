@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:24:45 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/06/27 13:24:53 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 16:24:24 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ int	check_line(char *line, char *prev, t_app *app)
 			return (write_error("Invalid character in map"));
 		if (!check_up(line, prev, i, prev_len))
 			return (0);
-		if (ft_strchr("NSEW", line[i]) && !init_player(&app->player, line[i], i, app->map.size.y))
+		if (ft_strchr("NSEW", line[i])
+			&& !init_player(&app->player, line[i], i, app->map.size.y))
 			return (0);
 		i++;
 	}

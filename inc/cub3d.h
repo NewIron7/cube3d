@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/20 15:17:40 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 20:01:20 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@
 # define COEF_MOVE 0.05
 # define COEF_MOVE_SIDE 0.04
 # define PLAYER_HEIGHT 0.5
+# define BODY_SIZE 0.1
 
 # define PI_6 0.5235987756
 # define PI_4 0.7853981634
@@ -207,5 +208,13 @@ int		load_map(char *line, int fd, t_app *app);
 int		process_setting(char *line, int type, t_app *app, char *textures[]);
 int		write_error(char *err);
 void	free_map(char **map);
+
+double	get_first_step_x(t_pvect vect);
+double	get_first_step_y(t_pvect vect);
+t_dpoint	next_wall_x(t_dpoint *pos, double n, double step);
+t_dpoint	next_wall_y(t_dpoint *pos, double n, double step);
+char	is_wall_x(t_wall *wall, t_map *map);
+char	is_wall_y(t_wall *wall, t_map *map);
+double	get_dist_wall(t_pvect *player, t_wall *wall);
 
 #endif
