@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:25:17 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/20 15:33:28 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 22:24:39 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,31 @@ static int	free_textures(char *textures[])
 	return (0);
 }
 
-static void	fill_texture(char *texture, char *filename)
-{
-	while (*filename)
-		*texture++ = *filename++;
-}
-
 static int	init_textures(char *textures[])
 {
+	size_t	len;
+
 	ft_bzero(textures, sizeof(char *) * 4);
-	textures[NORTH] = ft_calloc(ft_strlen(DFL_TXTR_NO) + 1, sizeof(char));
+	len = ft_strlen(DFL_TXTR_NO);
+	textures[NORTH] = ft_calloc(len + 1, sizeof(char));
 	if (!textures[NORTH])
 		return (free_textures(textures));
-	textures[SOUTH] = ft_calloc(ft_strlen(DFL_TXTR_SO) + 1, sizeof(char));
+	ft_memcpy(textures[NORTH], DFL_TXTR_NO, len);
+	len = ft_strlen(DFL_TXTR_SO);
+	textures[SOUTH] = ft_calloc(len + 1, sizeof(char));
 	if (!textures[SOUTH])
 		return (free_textures(textures));
+	ft_memcpy(textures[SOUTH], DFL_TXTR_SO, len);
+	len = ft_strlen(DFL_TXTR_WE);
 	textures[WEST] = ft_calloc(ft_strlen(DFL_TXTR_WE) + 1, sizeof(char));
 	if (!textures[WEST])
 		return (free_textures(textures));
+	ft_memcpy(textures[WEST], DFL_TXTR_WE, len);
+	len = ft_strlen(DFL_TXTR_EA);
 	textures[EAST] = ft_calloc(ft_strlen(DFL_TXTR_EA) + 1, sizeof(char));
 	if (!textures[EAST])
 		return (free_textures(textures));
-	fill_texture(textures[NORTH], DFL_TXTR_NO);
-	fill_texture(textures[SOUTH], DFL_TXTR_SO);
-	fill_texture(textures[WEST], DFL_TXTR_WE);
-	fill_texture(textures[EAST], DFL_TXTR_EA);
+	ft_memcpy(textures[EAST], DFL_TXTR_EA, len);
 	return (1);
 }
 

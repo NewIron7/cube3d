@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 08:37:44 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/19 18:42:26 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 22:27:59 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int	get_size_w_dist(double dist)
 {
-	//return (W_HEIGHT * (A_DIST * dist + B_DIST));
 	return ((W_HEIGHT * WALL_SIZE) / dist);
-	//return ((W_HEIGHT) / dist);
 }
 
 static t_point	get_pos_pxl_texture(t_img *texture, t_wall *wall, int y)
@@ -30,13 +28,12 @@ static t_point	get_pos_pxl_texture(t_img *texture, t_wall *wall, int y)
 	else
 		coef = (wall->dir.y - (int)wall->dir.y);
 	pos.x = texture->size.x * coef;
-	//printf("POS: %d, %d | DIST:%f\n", pos.x, pos.y, wall->dist);
 	return (pos);
 }
 
 unsigned int	get_color_pxl_texture(t_img *texture, t_wall *wall, int y)
 {
-	t_point	pos;
+	t_point			pos;
 	unsigned int	color;
 
 	pos = get_pos_pxl_texture(texture, wall, y);
@@ -48,7 +45,7 @@ void	print_wall_textured(int x, t_wall *wall, t_app *app)
 {
 	int	height;
 	int	color;
-	int y;
+	int	y;
 	int	top;
 
 	height = get_size_w_dist(wall->dist);

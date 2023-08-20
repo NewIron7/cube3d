@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 19:21:39 by hboissel          #+#    #+#             */
-/*   Updated: 2023/06/27 11:12:38 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 22:25:28 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 unsigned int	get_color_pixel(t_img *img, int x, int y)
 {
-	int	pos;
+	int				pos;
 	unsigned int	*color_ptr;
 
 	pos = 0;
