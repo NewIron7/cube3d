@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:25:39 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/06/27 13:25:41 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/21 01:19:37 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,14 @@ static int	process_color(char *line, int type, t_app *app)
 	if (inc < 0 || inc > 255)
 		return (write_error("Color parameters have incorrect values"));
 	color |= inc;
-	if (type == FLOOR)
-		app->colors[FLOOR] = color;
-	else
-		app->colors[CEILING] = color;
+	app->colors[type] = color;
 	return (1);
+}
+
+static void	replace_texture(char *texture, char *new_path)
+{
+	free(texture);
+	texture = new_path;
 }
 
 int	process_setting(char *line, int type, t_app *app, char *textures[])
@@ -97,24 +100,12 @@ int	process_setting(char *line, int type, t_app *app, char *textures[])
 	if (!path)
 		return (0);
 	if (type == LINE_NORTH)
-	{
-		free(textures[NORTH]);
-		textures[NORTH] = path;
-	}
+		replace_texture(textures[NORTH], path);
 	else if (type == LINE_SOUTH)
-	{
-		free(textures[SOUTH]);
-		textures[SOUTH] = path;
-	}
+		replace_texture(textures[SOUTH], path);
 	else if (type == LINE_EAST)
-	{
-		free(textures[EAST]);
-		textures[EAST] = path;
-	}
+		replace_texture(textures[EAST], path);
 	else
-	{
-		free(textures[WEST]);
-		textures[WEST] = path;
-	}
+		replace_texture(textures[WEST], path);
 	return (1);
 }

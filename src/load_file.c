@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:25:32 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/06/27 13:25:34 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/21 01:38:13 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ static int	get_line_type(char *line)
 	return (MAP);
 }
 
+static int	process_setting_error(char *line)
+{
+	free(line);
+	return (0);
+}
+
 int	load_file(t_app *app, int fd, char *textures[])
 {
 	char		*line;
@@ -47,10 +53,7 @@ int	load_file(t_app *app, int fd, char *textures[])
 		if (type != EMPTY)
 		{
 			if (!process_setting(line, type, app, textures))
-			{
-				free(line);
-				return (0);
-			}
+				return (process_setting_error(line));
 		}
 		free(line);
 		line = get_next_line(fd);

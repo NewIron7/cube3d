@@ -6,7 +6,7 @@
 #    By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 18:05:23 by hboissel          #+#    #+#              #
-#    Updated: 2023/08/20 22:13:40 by ddelhalt         ###   ########.fr        #
+#    Updated: 2023/08/21 00:26:59 by ddelhalt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/get_first_step.c\
 	  $(SRC_DIR)/next_wall.c\
 	  $(SRC_DIR)/is_wall.c\
-	  $(SRC_DIR)/do_player_move.c
+	  $(SRC_DIR)/do_player_move.c\
+	  $(SRC_DIR)/get_screen.c
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
 

@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/20 20:01:20 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/21 01:54:41 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@
 # define COS_30 0.8660254038
 # define A_DIST -0.02564102564
 # define B_DIST 1.012820513
-# define ANGLE (M_PI)/3
+# define ANGLE PI_3
 
-# define CHAR_WALL '1'
-# define CHAR_BLANK '0'
+# define CHAR_WALL 49
+# define CHAR_BLANK 48
 
 enum e_keys
 {
@@ -111,21 +111,21 @@ enum e_types
 
 typedef struct s_dpoint
 {
-	double x;
-	double y;
+	double	x;
+	double	y;
 }	t_dpoint;
 
 typedef struct s_screen
 {
-	double	panel;
-	double	step;
-	t_dpoint dir; 
+	double		panel;
+	double		step;
+	t_dpoint	dir; 
 }	t_screen;
 
 typedef struct s_pvect
 {
-	t_dpoint pos;
-	t_dpoint dir;
+	t_dpoint	pos;
+	t_dpoint	dir;
 }	t_pvect;
 
 typedef struct s_point
@@ -154,8 +154,8 @@ typedef struct s_img
 
 typedef struct s_map
 {
-	char **map;
-	t_point size;
+	char	**map;
+	t_point	size;
 }	t_map;
 
 typedef struct s_app
@@ -170,51 +170,54 @@ typedef struct s_app
 	unsigned int	colors[2];
 }	t_app;
 
-int		init_raycasting(t_app *app);
+int				init_raycasting(t_app *app);
 
-void    new_img(t_app *app, void *mlx, int width, int height);
-void	put_pixel(t_img *img, int x, int y, unsigned int color);
+void			new_img(t_app *app, void *mlx, int width, int height);
+void			put_pixel(t_img *img, int x, int y, unsigned int color);
 unsigned int	get_color_pixel(t_img *img, int x, int y);
-int    load_textures(t_app *app, char *filenames[4]);
+int				load_textures(t_app *app, char *filenames[]);
 
-t_wall	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map);
-void	raycasting(t_app *app);
-void    print_col_color(int x, double dist, t_img *img, char orient, t_app *app);
-int get_size_w_dist(double dist);
-int get_color_by_orient(char orient);
-void    print_wall_textured(int x, t_wall *wall, t_app *app);
+t_wall			get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map);
+void			raycasting(t_app *app);
+int				get_size_w_dist(double dist);
+int				get_color_by_orient(char orient);
+void			print_wall_textured(int x, t_wall *wall, t_app *app);
 
-t_dpoint	mult_dpoint(t_dpoint a, double coef);
-t_dpoint	sum_dpoint(t_dpoint a, t_dpoint b);
-void	cpy_dpoint(t_dpoint *src, t_dpoint *dest);
-t_dpoint    rotate_vect(t_dpoint *vect, double angle);
-t_dpoint	get_vect_orth(t_dpoint a);
+t_dpoint		mult_dpoint(t_dpoint a, double coef);
+t_dpoint		sum_dpoint(t_dpoint a, t_dpoint b);
+void			cpy_dpoint(t_dpoint *src, t_dpoint *dest);
+t_dpoint		rotate_vect(t_dpoint *vect, double angle);
+t_dpoint		get_vect_orth(t_dpoint a);
 
-void    ft_error_mlx(t_app *app);
-void    ft_error_malloc(const void *ptr, t_app *app, char *str);
+void			ft_error_mlx(t_app *app);
+void			ft_error_malloc(const void *ptr, t_app *app, char *str);
 
-int handle_key_press(int keycode, t_app *app);
-int handle_key_release(int keycode, t_app *app);
-void    do_player_move(t_app *app);
+int				handle_key_press(int keycode, t_app *app);
+int				handle_key_release(int keycode, t_app *app);
+void			do_player_move(t_app *app);
 
-int		ft_close(t_app *app);
+int				ft_close(t_app *app);
 
-void	test_get_coord_wall(t_img *img);
+void			test_get_coord_wall(t_img *img);
 
-int		read_file(char *filename, t_app *app);
-int		load_file(t_app *app, int fd, char *textures[]);
-int		check_line(char *line, char *prev, t_app *app);
-int		load_map(char *line, int fd, t_app *app);
-int		process_setting(char *line, int type, t_app *app, char *textures[]);
-int		write_error(char *err);
-void	free_map(char **map);
+int				read_file(char *filename, t_app *app);
+int				load_file(t_app *app, int fd, char *textures[]);
+int				check_line(char *line, char *prev, t_app *app);
+int				load_map(char *line, int fd, t_app *app);
+int				process_setting(char *line, int type,
+					t_app *app, char *textures[]);
+int				write_error(char *err);
+void			free_map(char **map);
 
-double	get_first_step_x(t_pvect vect);
-double	get_first_step_y(t_pvect vect);
-t_dpoint	next_wall_x(t_dpoint *pos, double n, double step);
-t_dpoint	next_wall_y(t_dpoint *pos, double n, double step);
-char	is_wall_x(t_wall *wall, t_map *map);
-char	is_wall_y(t_wall *wall, t_map *map);
-double	get_dist_wall(t_pvect *player, t_wall *wall);
+t_screen		get_screen_left(void);
+t_screen		get_screen_right(void);
+
+double			get_first_step_x(t_pvect vect);
+double			get_first_step_y(t_pvect vect);
+t_dpoint		next_wall_x(t_dpoint *pos, double n, double step);
+t_dpoint		next_wall_y(t_dpoint *pos, double n, double step);
+char			is_wall_x(t_wall *wall, t_map *map);
+char			is_wall_y(t_wall *wall, t_map *map);
+double			get_dist_wall(t_pvect *player, t_wall *wall);
 
 #endif
