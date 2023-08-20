@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/19 18:42:19 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 15:17:40 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,7 +174,7 @@ int		init_raycasting(t_app *app);
 void    new_img(t_app *app, void *mlx, int width, int height);
 void	put_pixel(t_img *img, int x, int y, unsigned int color);
 unsigned int	get_color_pixel(t_img *img, int x, int y);
-void    load_textures(t_app *app, char *filenames[4]);
+int    load_textures(t_app *app, char *filenames[4]);
 
 t_wall	get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map);
 void	raycasting(t_app *app);
@@ -200,11 +200,12 @@ int		ft_close(t_app *app);
 
 void	test_get_coord_wall(t_img *img);
 
-t_app	*read_file(char *filename);
+int		read_file(char *filename, t_app *app);
 int		load_file(t_app *app, int fd, char *textures[]);
 int		check_line(char *line, char *prev, t_app *app);
 int		load_map(char *line, int fd, t_app *app);
 int		process_setting(char *line, int type, t_app *app, char *textures[]);
 int		write_error(char *err);
+void	free_map(char **map);
 
 #endif

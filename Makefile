@@ -6,7 +6,7 @@
 #    By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 18:05:23 by hboissel          #+#    #+#              #
-#    Updated: 2023/06/27 13:56:56 by ddelhalt         ###   ########.fr        #
+#    Updated: 2023/08/20 15:18:42 by ddelhalt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/process_setting.c\
 	  $(SRC_DIR)/read_file.c\
 	  $(SRC_DIR)/write_error.c\
-	  $(SRC_DIR)/error.c
+	  $(SRC_DIR)/error.c\
+	  $(SRC_DIR)/free_map.c
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
 

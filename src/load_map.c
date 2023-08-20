@@ -6,23 +6,11 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:25:37 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/06/27 13:25:38 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/20 15:17:04 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	free_map(char **map)
-{
-	int	i;
-
-	if (!map)
-		return ;
-	i = 0;
-	while (map[i])
-		free(map[i++]);
-	free(map);
-}
 
 static int	load_map_error(t_map *map)
 {
