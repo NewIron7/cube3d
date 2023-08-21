@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:25:39 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/21 01:19:37 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/21 08:39:50 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ static int	process_color(char *line, int type, t_app *app)
 	return (1);
 }
 
-static void	replace_texture(char *texture, char *new_path)
+static void	replace_texture(char **texture, char *new_path)
 {
-	free(texture);
-	texture = new_path;
+	free(*texture);
+	*texture = new_path;
 }
 
 int	process_setting(char *line, int type, t_app *app, char *textures[])
@@ -100,12 +100,12 @@ int	process_setting(char *line, int type, t_app *app, char *textures[])
 	if (!path)
 		return (0);
 	if (type == LINE_NORTH)
-		replace_texture(textures[NORTH], path);
+		replace_texture(&textures[NORTH], path);
 	else if (type == LINE_SOUTH)
-		replace_texture(textures[SOUTH], path);
+		replace_texture(&textures[SOUTH], path);
 	else if (type == LINE_EAST)
-		replace_texture(textures[EAST], path);
+		replace_texture(&textures[EAST], path);
 	else
-		replace_texture(textures[WEST], path);
+		replace_texture(&textures[WEST], path);
 	return (1);
 }
