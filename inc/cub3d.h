@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/21 01:54:41 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/21 09:21:17 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,5 +219,7 @@ t_dpoint		next_wall_y(t_dpoint *pos, double n, double step);
 char			is_wall_x(t_wall *wall, t_map *map);
 char			is_wall_y(t_wall *wall, t_map *map);
 double			get_dist_wall(t_pvect *player, t_wall *wall);
+
+void			do_mouse_move(t_app *app);
 
 #endif
