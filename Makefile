@@ -6,7 +6,7 @@
 #    By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 18:05:23 by hboissel          #+#    #+#              #
-#    Updated: 2023/08/21 09:21:42 by ddelhalt         ###   ########.fr        #
+#    Updated: 2023/08/22 17:52:39 by ddelhalt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,9 @@ SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/is_wall.c\
 	  $(SRC_DIR)/do_player_move.c\
 	  $(SRC_DIR)/do_mouse_move.c\
-	  $(SRC_DIR)/get_screen.c
+	  $(SRC_DIR)/get_screen.c\
+	  $(SRC_DIR)/minimap.c
+	  
 
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(BIN_DIR)/%.o)
 

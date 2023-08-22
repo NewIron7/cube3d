@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/21 09:21:17 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/22 18:05:04 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@
 # define W_WIDTH 1280
 # define W_HEIGHT 720
 # define W_NAME "cub3d"
+
+# define MM_HRANGE 15
+# define MM_VRANGE 10
+# define MM_ELEM 5
+# define MM_OFFSET 20
+# define C_MM_WALL 0x00303030
+# define C_MM_FLOOR 0x00A08020
+# define C_MM_PLAYER 0x00202080
 
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
@@ -57,6 +65,7 @@
 # define WALL_SIZE 1.5
 # define DIST_COL 0.49
 # define ROT_ANGLE 0.02
+# define MOUSE_ANGLE 0.002
 # define COEF_MOVE 0.05
 # define COEF_MOVE_SIDE 0.04
 # define PLAYER_HEIGHT 0.5
@@ -219,6 +228,7 @@ t_dpoint		next_wall_y(t_dpoint *pos, double n, double step);
 char			is_wall_x(t_wall *wall, t_map *map);
 char			is_wall_y(t_wall *wall, t_map *map);
 double			get_dist_wall(t_pvect *player, t_wall *wall);
+void			minimap(t_app *app);
 
 void			do_mouse_move(t_app *app);
 
