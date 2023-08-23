@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/22 18:05:04 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/23 18:34:43 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define C_MM_WALL 0x00303030
 # define C_MM_FLOOR 0x00A08020
 # define C_MM_PLAYER 0x00202080
+# define C_MM_DIRECTION 0x004040A0
 
 # define KEY_ESC 65307
 # define KEY_LEFT 65361
@@ -231,5 +232,6 @@ double			get_dist_wall(t_pvect *player, t_wall *wall);
 void			minimap(t_app *app);
 
 void			do_mouse_move(t_app *app);
+void			ft_plotLine(t_point p1, t_point p2, t_point multi, t_img *img);
 
 #endif
