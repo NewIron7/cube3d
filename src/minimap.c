@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:34:49 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/24 10:58:45 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/24 14:46:04 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,18 +61,19 @@ static void	draw_minimap(t_app *app, t_point start, t_point pos)
 	t_point	player;
 
 	i = 0;
-	while (i < MM_HRANGE * 2 + 1 && i + start.x < app->map.size.x)
+	while (i < MM_VRANGE * 2 + 1 && i + start.y < app->map.size.y)
 	{
-		square.x = i * MM_ELEM + MM_OFFSET;
+		square.y = i * MM_ELEM + MM_OFFSET;
 		j = 0;
-		while (j < MM_VRANGE * 2 + 1 && j + start.y < app->map.size.y)
+		while (j < MM_HRANGE * 2 + 1 && j + start.x < app->map.size.x
+			&& app->map.map[start.y + i][start.x + j])
 		{
-			square.y = j * MM_ELEM + MM_OFFSET;
-			if (start.x + i == pos.x && start.y + j == pos.y)
+			square.x = j * MM_ELEM + MM_OFFSET;
+			if (start.y + i == pos.y && start.x + j == pos.x)
 				player = draw_square(square, C_MM_PLAYER, &app->img);
-			else if (app->map.map[start.y + j][start.x + i] == CHAR_WALL)
+			else if (app->map.map[start.y + i][start.x + j] == CHAR_WALL)
 				draw_square(square, C_MM_WALL, &app->img);
-			else if (app->map.map[start.y + j][start.x + i] == CHAR_BLANK)
+			else if (app->map.map[start.y + i][start.x + j] == CHAR_BLANK)
 				draw_square(square, C_MM_FLOOR, &app->img);
 			j++;
 		}
