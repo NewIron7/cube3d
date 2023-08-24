@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 13:24:45 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/20 16:24:24 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/24 10:50:13 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,26 +42,27 @@ static int	check_down(char *line, char *next, int next_len)
 	return (1);
 }
 
-static int	init_player(t_pvect *player, char orient, int x, int y)
+static int	init_player(t_pvect *player, char *line, int x, int y)
 {
 	if (player->pos.x)
 		return (write_error("Map has multiple starting positions"));
 	player->pos.x = x + 0.5;
 	player->pos.y = y + 0.5;
-	if (ft_strchr("NS", orient))
+	if (ft_strchr("NS", line[x]))
 	{
 		player->dir.x = 0;
 		player->dir.y = 1;
-		if (orient == 'N')
+		if (line[x] == 'N')
 			player->dir.y = -1;
 	}
 	else
 	{
 		player->dir.y = 0;
 		player->dir.x = 1;
-		if (orient == 'W')
+		if (line[x] == 'W')
 			player->dir.x = -1;
 	}
+	line[x] = CHAR_BLANK;
 	return (1);
 }
 
@@ -83,7 +84,7 @@ int	check_line(char *line, char *prev, t_app *app)
 		if (!check_up(line, prev, i, prev_len))
 			return (0);
 		if (ft_strchr("NSEW", line[i])
-			&& !init_player(&app->player, line[i], i, app->map.size.y))
+			&& !init_player(&app->player, line, i, app->map.size.y))
 			return (0);
 		i++;
 	}

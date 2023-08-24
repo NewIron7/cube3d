@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:34:49 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/23 18:52:03 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/24 10:58:45 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void	draw_direction(t_point square, t_dpoint dir, t_img *img)
 	t_point	end;
 	t_point	multi;
 
-	square.x += MM_ELEM / 2 + 1;
-	square.y += MM_ELEM / 2 + 1;
+	square.x += MM_ELEM / 2;
+	square.y += MM_ELEM / 2;
 	end.x = 100 * dir.x;
 	end.y = 100 * dir.y;
 	if (end.x < 0)
@@ -31,10 +31,10 @@ static void	draw_direction(t_point square, t_dpoint dir, t_img *img)
 	else
 		multi.y = 1;
 	end.y = square.y + end.y * multi.y;
-	ft_plotLine(square, end, multi, img);
+	ft_plotline(square, end, multi, img);
 }
 
-static void	draw_square(t_point square, unsigned int color, t_img *img)
+static t_point	draw_square(t_point square, unsigned int color, t_img *img)
 {
 	int	i;
 	int	j;
@@ -50,6 +50,7 @@ static void	draw_square(t_point square, unsigned int color, t_img *img)
 		}
 		i++;
 	}
+	return (square);
 }
 
 static void	draw_minimap(t_app *app, t_point start, t_point pos)
@@ -57,7 +58,8 @@ static void	draw_minimap(t_app *app, t_point start, t_point pos)
 	int		i;
 	int		j;
 	t_point	square;
-	
+	t_point	player;
+
 	i = 0;
 	while (i < MM_HRANGE * 2 + 1 && i + start.x < app->map.size.x)
 	{
@@ -67,18 +69,16 @@ static void	draw_minimap(t_app *app, t_point start, t_point pos)
 		{
 			square.y = j * MM_ELEM + MM_OFFSET;
 			if (start.x + i == pos.x && start.y + j == pos.y)
-			{
-				draw_square(square, C_MM_PLAYER, &app->img);
-				draw_direction(square, app->player.dir, &app->img);
-			}
+				player = draw_square(square, C_MM_PLAYER, &app->img);
 			else if (app->map.map[start.y + j][start.x + i] == CHAR_WALL)
 				draw_square(square, C_MM_WALL, &app->img);
-			else
+			else if (app->map.map[start.y + j][start.x + i] == CHAR_BLANK)
 				draw_square(square, C_MM_FLOOR, &app->img);
 			j++;
 		}
 		i++;
 	}
+	draw_direction(player, app->player.dir, &app->img);
 }
 
 static int	ft_max(int a, int b)
