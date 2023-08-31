@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:27:08 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/31 16:03:44 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:16:55 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,24 @@ static int	render(void *app_render)
 
 int	ft_close(t_app *app)
 {
+	int	i;
+
 	if (app)
 	{
 		if (app->mlx_ptr)
 		{
 			if (app->img.ptr)
 				mlx_destroy_image(app->mlx_ptr, app->img.ptr);
+			i = 0;
+			while (i < 4)
+			{
+				if (app->textures[i].ptr)
+					mlx_destroy_image(app->mlx_ptr, app->textures[i].ptr);
+				i++;
+			}
 			if (app->win_ptr)
 				mlx_destroy_window(app->mlx_ptr, app->win_ptr);
+			free_map(app->map.map);
 			mlx_destroy_display(app->mlx_ptr);
 			free(app->mlx_ptr);
 		}
