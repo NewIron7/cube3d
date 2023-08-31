@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/24 10:58:05 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:37:51 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ typedef struct s_screen
 {
 	double		panel;
 	double		step;
-	t_dpoint	dir; 
+	t_dpoint	dir;
 }	t_screen;
 
 typedef struct s_pvect
@@ -189,8 +189,6 @@ int				load_textures(t_app *app, char *filenames[]);
 
 t_wall			get_coord_wall(t_dpoint dir, t_dpoint pos, t_map *map);
 void			raycasting(t_app *app);
-int				get_size_w_dist(double dist);
-int				get_color_by_orient(char orient);
 void			print_wall_textured(int x, t_wall *wall, t_app *app);
 
 t_dpoint		mult_dpoint(t_dpoint a, double coef);
@@ -235,4 +233,3 @@ void			do_mouse_move(t_app *app);
 void			ft_plotline(t_point p1, t_point p2, t_point multi, t_img *img);
 
 #endif
-

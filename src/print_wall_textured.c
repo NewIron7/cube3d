@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting_utils.c                                 :+:      :+:    :+:   */
+/*   print_wall_textured.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 08:37:44 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/21 01:29:31 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 14:55:38 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_size_w_dist(double dist)
+static int	get_size_w_dist(double dist)
 {
 	return ((W_HEIGHT * WALL_SIZE) / dist);
 }
@@ -31,7 +31,7 @@ static t_point	get_pos_pxl_texture(t_img *texture, t_wall *wall, int y)
 	return (pos);
 }
 
-unsigned int	get_color_pxl_texture(t_img *texture, t_wall *wall, int y)
+static unsigned int	get_color_pxl_texture(t_img *texture, t_wall *wall, int y)
 {
 	t_point			pos;
 	unsigned int	color;
@@ -62,15 +62,4 @@ void	print_wall_textured(int x, t_wall *wall, t_app *app)
 	}
 	while (y < app->img.size.y)
 		put_pixel(&app->img, x, y++, app->colors[FLOOR]);
-}
-
-int	get_color_by_orient(char orient)
-{
-	if (orient == NORTH)
-		return (C_NORTH);
-	if (orient == SOUTH)
-		return (C_SOUTH);
-	if (orient == EAST)
-		return (C_EAST);
-	return (C_WEST);
 }

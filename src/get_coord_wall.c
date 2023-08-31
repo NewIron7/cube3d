@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:45:05 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/20 16:50:22 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:16:07 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ static void	get_coord_wall_x(t_pvect player, t_map *map, t_wall *wall)
 	n = player.dir.y / player.dir.x;
 	step = get_first_step_x(player);
 	wall->orient = EAST;
-	if (step < 0)
+	if (step <= 0)
 		wall->orient = WEST;
-	while (step)
+	wall->dir = next_wall_x(&player.pos, n, step);
+	step = 1;
+	if (wall->orient == WEST)
+		step = -1;
+	while (1)
 	{
-		wall->dir = next_wall_x(&player.pos, n, step);
 		if (is_wall_x(wall, map))
 			break ;
-		step = 1;
-		if (wall->orient == WEST)
-			step = -1;
+		wall->dir = next_wall_x(&player.pos, n, step);
 	}
 }
 
@@ -43,58 +44,61 @@ static void	get_coord_wall_y(t_pvect player, t_map *map, t_wall *wall)
 	n = player.dir.x / player.dir.y;
 	step = get_first_step_y(player);
 	wall->orient = SOUTH;
-	if (step < 0)
+	if (step <= 0)
 		wall->orient = NORTH;
-	while (step)
+	wall->dir = next_wall_y(&player.pos, n, step);
+	step = 1;
+	if (wall->orient == NORTH)
+		step = -1;
+	while (1)
 	{
-		wall->dir = next_wall_y(&player.pos, n, step);
 		if (is_wall_y(wall, map))
 			break ;
-		step = 1;
-		if (wall->orient == NORTH)
-			step = -1;
+		wall->dir = next_wall_y(&player.pos, n, step);
 	}
 }
 
-void	get_coord_wall_straight_y(t_pvect player, t_map *map, t_wall *wall)
+static void	get_coord_wall_straight_y(t_pvect player, t_map *map, t_wall *wall)
 {
 	double	step;
 
 	step = get_first_step_y(player);
 	wall->orient = SOUTH;
-	if (step < 0)
+	if (step <= 0)
 		wall->orient = NORTH;
-	wall->dist = (step < 0) * (step * -1) + (step > 0) * step;
-	while (step)
+	wall->dist = fabs(step);
+	wall->dir = next_wall_y(&player.pos, 0, step);
+	step = 1;
+	if (wall->orient == NORTH)
+		step = -1;
+	while (1)
 	{
-		wall->dir = next_wall_y(&player.pos, 0, step);
 		if (is_wall_y(wall, map))
 			break ;
 		wall->dist++;
-		step = 1;
-		if (wall->orient == NORTH)
-			step = -1;
+		wall->dir = next_wall_x(&player.pos, 0, step);
 	}
 }
 
-void	get_coord_wall_straight_x(t_pvect player, t_map *map, t_wall *wall)
+static void	get_coord_wall_straight_x(t_pvect player, t_map *map, t_wall *wall)
 {
 	double	step;
 
 	step = get_first_step_x(player);
 	wall->orient = EAST;
-	if (step < 0)
+	if (step <= 0)
 		wall->orient = WEST;
-	wall->dist = (step < 0) * (step * -1) + (step > 0) * step;
-	while (step)
+	wall->dist = fabs(step);
+	wall->dir = next_wall_x(&player.pos, 0, step);
+	step = 1;
+	if (wall->orient == WEST)
+		step = -1;
+	while (1)
 	{
-		wall->dir = next_wall_x(&player.pos, 0, step);
 		if (is_wall_x(wall, map))
 			break ;
 		wall->dist++;
-		step = 1;
-		if (wall->orient == WEST)
-			step = -1;
+		wall->dir = next_wall_x(&player.pos, 0, step);
 	}
 }
 

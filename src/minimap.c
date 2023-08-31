@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 14:34:49 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/24 14:46:04 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 15:10:32 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,7 @@ static void	draw_minimap(t_app *app, t_point start, t_point pos)
 	{
 		square.y = i * MM_ELEM + MM_OFFSET;
 		j = 0;
-		while (j < MM_HRANGE * 2 + 1 && j + start.x < app->map.size.x
-			&& app->map.map[start.y + i][start.x + j])
+		while (j < MM_HRANGE * 2 + 1 && j + start.x < app->map.size.x)
 		{
 			square.x = j * MM_ELEM + MM_OFFSET;
 			if (start.y + i == pos.y && start.x + j == pos.x)

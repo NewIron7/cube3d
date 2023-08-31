@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 22:12:34 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/20 22:13:02 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:05:03 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,5 @@ void	do_player_move(t_app *app)
 		app->player.dir = rotate_vect(&app->player.dir, -ROT_ANGLE * speed);
 	if (app->keys[E_RIGHT_KEY])
 		app->player.dir = rotate_vect(&app->player.dir, ROT_ANGLE * speed);
+	do_mouse_move(app);
 }

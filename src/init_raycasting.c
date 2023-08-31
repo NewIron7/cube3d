@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:27:08 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/22 16:58:35 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:03:44 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static int	render(void *app_render)
 	t_app	*app;
 
 	app = (t_app *)app_render;
-	do_mouse_move(app);
 	do_player_move(app);
 	raycasting(app);
 	minimap(app);
