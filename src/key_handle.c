@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 08:54:52 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/20 22:12:24 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:37:27 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	handle_key_press(int keycode, t_app *app)
 		app->keys[E_D_KEY] = 1;
 	else if (keycode == KEY_SHIFT)
 		app->keys[E_SHIFT_KEY] = 1;
+	else if (keycode == KEY_CTRL)
+		app->keys[E_CTRL_KEY] = 1;
 	return (0);
 }
 
@@ -49,5 +51,7 @@ int	handle_key_release(int keycode, t_app *app)
 		app->keys[E_D_KEY] = 0;
 	else if (keycode == KEY_SHIFT)
 		app->keys[E_SHIFT_KEY] = 0;
+	else if (keycode == KEY_CTRL)
+		app->keys[E_CTRL_KEY] = 0;
 	return (0);
 }

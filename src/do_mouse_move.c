@@ -6,7 +6,7 @@
 /*   By: ddelhalt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 09:03:31 by ddelhalt          #+#    #+#             */
-/*   Updated: 2023/08/22 16:57:01 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:36:10 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	do_mouse_move(t_app *app)
 	int		y;
 	double	rot;
 
+	if (app->keys[E_CTRL_KEY])
+		return ;
 	if (!mlx_mouse_get_pos(app->mlx_ptr, app->win_ptr, &x, &y))
 		return ;
 	if (x == W_WIDTH / 2)

@@ -6,7 +6,7 @@
 /*   By: hboissel <hboissel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 18:20:59 by hboissel          #+#    #+#             */
-/*   Updated: 2023/08/31 15:37:51 by ddelhalt         ###   ########.fr       */
+/*   Updated: 2023/08/31 16:36:45 by ddelhalt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_SHIFT 65505
+# define KEY_CTRL 65507
 
 # define C_RED 0x00FF0000
 # define C_GREEN 0x0000FF00
@@ -96,7 +97,8 @@ enum e_keys
 	E_D_KEY,
 	E_LEFT_KEY,
 	E_RIGHT_KEY,
-	E_SHIFT_KEY
+	E_SHIFT_KEY,
+	E_CTRL_KEY
 };
 
 enum e_orient
@@ -175,7 +177,7 @@ typedef struct s_app
 	t_map			map;
 	t_img			img;
 	t_pvect			player;
-	char			keys[7];
+	char			keys[8];
 	t_img			textures[4];
 	unsigned int	colors[2];
 }	t_app;
